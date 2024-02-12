@@ -2,7 +2,7 @@ import React from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Helmet } from 'react-helmet';
 
-const ComunicacionHR: React.FC = () => {
+const Home: React.FC = () => {
 
   return (
     <div>
@@ -17,4 +17,4 @@ const ComunicacionHR: React.FC = () => {
   )
 }
 
-export default ComunicacionHR;
+export default Home;
