@@ -1,0 +1,20 @@
+@media screen and (max-width: 600px) {
+    .MuiTypography-body2 {
+      font-size: 5vw !important;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 960px) {
+    .MuiTypography-body2 {
+        font-size: 2.6vw !important;
+    }
+}
+@media screen and (min-width: 960px){
+    .MuiTypography-body2 {
+        font-size: 1.3vw !important;
+    }
+}
+.MuiTypography-body2 {
+    font-family: times !important;
+    font-style: italic !important;
+}
+
