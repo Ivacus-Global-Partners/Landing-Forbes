@@ -1,6 +1,7 @@
 import React from 'react';
-import DownloadIcon from '@mui/icons-material/Download';
 import { Helmet } from 'react-helmet';
+import Footer from '../../components/Footer';
+import Form from '../../components/Form';
 
 const Home: React.FC = () => {
 
@@ -13,6 +14,8 @@ const Home: React.FC = () => {
         <meta name="robots" content="index, follow" />
         <meta name="keywords" content="comunicación interna, negocios, eficiencia empresarial, soluciones de comunicación" />
       </Helmet>
+      <Form />
+      <Footer />
     </div>
   )
 }
