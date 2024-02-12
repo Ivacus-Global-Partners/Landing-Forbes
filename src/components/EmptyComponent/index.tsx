@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 }));
 
-const Form = () => {
+const Name = () => {
     const classes = useStyles();
 
     return (
@@ -17,4 +17,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default Name;
