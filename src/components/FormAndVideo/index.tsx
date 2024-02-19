@@ -7,12 +7,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     container: {
         display: 'flex',
         columnGap: '30px',
-        '& iframe': {
-            flex: 1
-        },
         '& div': {
             flex: 1
         },
+    },
+    video: {
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: '80px',
+        '& img': {
+            width: '100%',
+        },
+        '& iframe': {
+            width: '100%',
+        }
     }
 }));
 
@@ -22,7 +30,10 @@ const FormAndVideo = () => {
     return (
         <div className={classes.container}>
             <Form />
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            <div className={classes.video}>
+                <iframe width="560" height="347" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                <img src="https://forbes.es/wp-content/uploads/2024/02/Flechas_Video-1200x460.png" alt="arrows" />
+            </div>
         </div>
     );
 };

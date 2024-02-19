@@ -24,13 +24,18 @@ const Home: React.FC = () => {
   return (
     <div className={classes.container}>
       <Helmet>
-        <title>HR: Comunicación Interna al servicio del Negocio</title>
-        <meta name="title" content="HR: Comunicación Interna al servicio del Negocio" />
-        <meta name="description" content="Descubre cómo la comunicación interna puede potenciar tu negocio. En Sagardoy, ofrecemos soluciones de comunicación interna para mejorar la eficiencia y el rendimiento de tu empresa. ¡Conoce nuestras propuestas hoy!" />
-        <meta name="robots" content="index, follow" />
-        <meta name="keywords" content="comunicación interna, negocios, eficiencia empresarial, soluciones de comunicación" />
+        <title>Forbes Sagardoy Business School - Forbes España</title>
+        <meta name="title" content="Forbes Sagardoy Business School - Forbes España" />
+        <meta name="description" content="En Forbes Sagardoy Business School entendemos que cada empresa es única, con desafíos y objetivos específicos. Ofrecemos programas diseñados a medida." />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="keywords" content="forbes, sagardoy, business school" />
       </Helmet>
-      <img className={classes.banner} src="https://firebasestorage.googleapis.com/v0/b/sagardoy-lms.appspot.com/o/website%2FlandingForbes%2F01_animacion_2.gif?alt=media&token=e0f7c0d1-6978-43c1-bf55-8ab6fbb30e3c" alt="banner" />
+      <div id="video-container">
+        <video id="banner-video" width="100%" height="auto" muted loop autoPlay>
+          <source src="https://firebasestorage.googleapis.com/v0/b/sagardoy-lms.appspot.com/o/website%2FlandingForbes%2F01_animacion_2.mp4?alt=media&token=e87bf6f6-fab8-4b2e-87fd-4beddae00329" type="video/mp4" />
+          Video no soportado
+        </video>
+      </div>
       <FormAndVideo />
       <Footer />
     </div>

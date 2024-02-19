@@ -48,6 +48,27 @@ const useStyles = makeStyles((theme: Theme) => ({
             width: '100%',
             gap: '15px'
         }
+    },
+    whatsappContainer: {
+        width: '100%',
+        minWidth: '200px',
+        padding: '0 35px 0 7px',
+    },
+    whatsapp: {
+        background: '#5ACC70',
+        border: 'none',
+        borderRadius: '5px',
+        color: 'white',
+        width: '50%',
+        padding: '10px',
+        fontSize: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '10px',
+        '& img': {
+            width: '26px',
+        }
     }
 }));
 
@@ -147,6 +168,12 @@ const Form = () => {
                     onChange={handleChange}
                     errors={errors.phone}
                 />
+                <div className={classes.whatsappContainer}>
+                    <button type="button" className={classes.whatsapp}>
+                        <img src="https://app-widgets.jotform.io/whatsAppButton/img/wapp.svg" alt="whatsapp-logo" />
+                        Contacta por whatsapp
+                    </button>
+                </div>
             </form>
         </div>
     );
