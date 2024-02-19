@@ -70,11 +70,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, errors }:
+const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, checked, errors, inputStyle, labelStyle, style }:
     {
         name: string,
         value: string,
-        label: string,
+        label: string | React.ReactNode,
         id?: string,
         type?: string,
         select?: boolean,
@@ -82,13 +82,17 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
         prefix?: string,
         required?: boolean,
         onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-        errors?: Array<string>
+        checked?: boolean,
+        errors?: Array<string>,
+        inputStyle?: React.CSSProperties,
+        labelStyle?: React.CSSProperties,
+        style?: React.CSSProperties,
     }) => {
     const classes = useStyles();
 
     const labelTag = required
-        ? (<label htmlFor={id}>{label}<span style={{ color: "#dc2626" }}> *</span></label>)
-        : <label htmlFor={id}>{label}</label>;
+        ? (<label style={labelStyle} htmlFor={id}>{label}<span style={{ color: "#dc2626" }}> *</span></label>)
+        : <label style={labelStyle} htmlFor={id}>{label}</label>;
 
     const input = select
         ? (
@@ -100,23 +104,24 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
             ? (
                 <div className={classes.phoneContainer}>
                     <div style={{ width: '40%' }} className={classes.phoneInput}>
-                        <input type="text" id="prefix" name="prefix" value={prefix} onChange={onChange} />
+                        <input style={inputStyle} type="text" id="prefix" name="prefix" value={prefix} onChange={onChange} />
                         <p>Código país</p>
                     </div>
                     <div style={{ width: '60%' }} className={classes.phoneInput}>
-                        <input type="tel" id={id} name={name} value={value} onChange={onChange} />
+                        <input style={inputStyle} type="tel" id={id} name={name} value={value} onChange={onChange} />
                         <p>Número de teléfono</p>
                     </div>
                 </div >
             )
             : (
-                <input type={type} id={id} name={name} value={value} onChange={onChange} />
+                <input style={inputStyle} type={type} id={id} name={name} value={value} checked={type === 'checkbox' && checked} onChange={onChange} />
             )
 
     return (
-        <div className={classes.input}>
-            {labelTag}
+        <div className={classes.input} style={style}>
+            {type !== 'checkbox' && labelTag}
             {input}
+            {type === 'checkbox' && labelTag}
             {errors && errors.length > 0 && errors.map((error, index) => (
                 <p className={classes.error} key={index}>{error}</p>
             ))}

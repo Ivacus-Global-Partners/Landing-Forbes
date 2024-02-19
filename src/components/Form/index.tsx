@@ -11,7 +11,9 @@ interface Values {
     program: string,
     country: string,
     prefix: string,
-    phone: string
+    phone: string,
+    acceptedPolicy: boolean,
+    keepContact: boolean
 }
 
 interface Errors {
@@ -21,7 +23,9 @@ interface Errors {
     program: [],
     country: [],
     prefix: [],
-    phone: []
+    phone: [],
+    acceptedPolicy: [],
+    keepContact: []
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,13 +57,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '100%',
         minWidth: '200px',
         padding: '0 35px 0 7px',
+        flex: 'auto',
     },
     whatsapp: {
+        textDecoration: 'none',
         background: '#5ACC70',
         border: 'none',
         borderRadius: '5px',
         color: 'white',
-        width: '50%',
+        width: '46%',
         padding: '10px',
         fontSize: '16px',
         display: 'flex',
@@ -80,7 +86,9 @@ const Form = () => {
         program: '0',
         country: '+34',
         prefix: '',
-        phone: ''
+        phone: '',
+        acceptedPolicy: false,
+        keepContact: false
     })
     const [errors, setErrors] = useState<Errors>({
         name: [],
@@ -89,14 +97,16 @@ const Form = () => {
         program: [],
         country: [],
         prefix: [],
-        phone: []
+        phone: [],
+        acceptedPolicy: [],
+        keepContact: []
     });
     const classes = useStyles();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        console.log(name, value)
-        setValues({ ...values, [name]: value });
+        const checked = e.target.type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : false;
+        setValues({ ...values, [name]: e.target.type === 'checkbox' ? checked : value });
     }
 
     return (
@@ -169,11 +179,27 @@ const Form = () => {
                     errors={errors.phone}
                 />
                 <div className={classes.whatsappContainer}>
-                    <button type="button" className={classes.whatsapp}>
+                    <a className={classes.whatsapp} href="acceptedPolicy" target="_blank" rel="noreferrer">
                         <img src="https://app-widgets.jotform.io/whatsAppButton/img/wapp.svg" alt="whatsapp-logo" />
                         Contacta por whatsapp
-                    </button>
+                    </a>
                 </div>
+                <br />
+                <Input
+                    required
+                    name="acceptedPolicy"
+                    value={values.acceptedPolicy.toString()}
+                    label={
+                        <>SpainMedia y Grupo Sagardoy atenderán tu solicitud de información sobre nuestros servicios formativos. Para esta finalidad y las siguientes, puedes oponerte y acceder, rectificar o suprimir tus datos y ejercitar otros derechos como se indica en nuestra <a href="https://forbes.es/politica-de-privacidad/" target='_blank' rel="noreferrer">Política de privacidad </a>.
+                        </>}
+                    type="checkbox"
+                    checked={values.acceptedPolicy}
+                    onChange={handleChange}
+                    errors={errors.acceptedPolicy}
+                    style={{ flex: 'auto', display: 'inline' }}
+                    labelStyle={{ color: '#6d6d6d' }}
+                    inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
+                />
             </form>
         </div>
     );
