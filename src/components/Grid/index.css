@@ -2,11 +2,24 @@
 
 /* Otros estilos aquí */
 
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 45%; /* Reducir el tamaño de las tarjetas en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    flex: 1 1 100%; /* Mostrar una tarjeta por fila en pantallas muy pequeñas */
+  }
+}
+
 /* Estilos para la tarjeta de volteo */
 .flip-card {
   background-color: transparent;
-  width: 300px; /* Ancho deseado */
-  height: 400px; /* Alto deseado */
+  width: 100%; /* Ancho deseado */
+  height: 100%; /* Alto deseado */
   perspective: 1000px; /* Profundidad de perspectiva para el efecto 3D */
 }
 
@@ -36,6 +49,7 @@
 .flip-card-back {
   background-color: #f2f2f2; /* Color de la parte trasera de la tarjeta */
   transform: rotateY(180deg);
+  border-color: black;
 }
 
 .card-container {
@@ -48,13 +62,14 @@
 /* Estilos para las tarjetas */
 .card {
   position: relative; /* Posición relativa para que el contenido absoluto se posicione dentro de la tarjeta */
-  width: 400px; /* Ancho deseado de la tarjeta */
+  width: 470px; /* Ancho deseado de la tarjeta */
   height: 300px; /* Altura deseada de la tarjeta */
-  margin: 5px; /* Espacio entre las tarjetas */
+  margin: 9px;
   background-color: #fff; /* Color de fondo de la tarjeta */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
   border-radius: 0px; /* Bordes redondeados */
   overflow: hidden; /* Oculta cualquier contenido que se desborde */
+  flex: 1 1 30%; /* Establece el ancho de cada tarjeta para que haya tres por fila */
 }
 
 .card img {
@@ -69,14 +84,50 @@
   left: 20px; /* Distancia desde el lado izquierdo de la tarjeta */
   right: 20px; /* Distancia desde el lado derecho de la tarjeta */
   color: #fff; /* Color del texto */
+  bottom: 0px; /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
 }
 
 .card-content h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 28px;
+  position: absolute;
+  top: 10px; /* Ajusta el título a la parte superior de la tarjeta */
+  left: 10px; /* Ajusta el título al lado izquierdo de la tarjeta */
+  z-index: 1; /* Asegura que el título esté por encima de la imagen */
+  color: white; /* Color del texto */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Fuente del texto */
+  font-weight: bold; /* Peso de la fuente */
+  margin: 0; /* Elimina los márgenes predeterminados */
+  text-transform: uppercase; /* Convierte el texto en mayúsculas */
+  text-align: left; /* Alinea el texto a la izquierda */
 }
-
 .card-content p {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 18px;
+  position: absolute;
+  top: 80%; /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
+  left: 10px;
+  right: 20px;
+  z-index: 1;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  text-align: left;
+}
+
+.grid-title {
+  font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
+  font-size: 100px;
+  color: #8F0025;
+  margin: 32px 0;
+  left: 10px;
+  max-width: 100%;
+  line-height: var(--newspack-theme-font-line-height-heading);
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 10px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
