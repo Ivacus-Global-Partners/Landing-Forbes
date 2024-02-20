@@ -1,15 +1,74 @@
 import React from 'react';
 import './index.css';
 
+const cards = [
+  {
+    title: "leadership essentials",
+    description: "Impulsando tu trayectoria",
+    img: "https://forbes.es/wp-content/uploads/2024/01/2-1-scaled.jpg",
+    date: "Mayo-Junio (viernes)",
+    format: "Presencial o virtual",
+    modules: 2,
+    sessions: 10,
+    link: "https://forbes.es/forbes-sagardoy-business-school/leadeship-essentials/"
+  },
+  {
+    title: "customer experience",
+    description: "En la excelencia del lujo",
+    img: "https://forbes.es/wp-content/uploads/2024/01/4-1-scaled.jpg",
+    date: "Mayo-Junio (jueves)",
+    format: "presencial",
+    modules: 6,
+    sessions: 12,
+    link: "https://forbes.es/forbes-sagardoy-business-school/customer-experience/"
+  },
+  {
+    title: "el valor de la diversidad",
+    description: "Diversidad, equidad, inclusión y accesibilidad",
+    img: "https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg",
+    date: "Mayo-Junio (martes/jueves)",
+    format: "Presencial o virtual",
+    modules: 8,
+    sessions: 8,
+    link: "https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
+  },
+  {
+    title: "ia",
+    description: "Transformando negocios e industrias",
+    img: "https://forbes.es/wp-content/uploads/2024/01/5-1-scaled.jpg",
+    date: "Mayo-Junio (jueves)",
+    format: "Presencial o virtual",
+    modules: 3,
+    sessions: 6,
+    link: "https://forbes.es/forbes-sagardoy-business-school/ia-transformando-la-industria/"
+  },
+  {
+    title: "sostenibilidad corporativa",
+    description: "Claves para el futuro",
+    img: "https://forbes.es/wp-content/uploads/2024/01/1-1-scaled.jpg",
+    date: "Mayo-Junio (jueves)",
+    format: "Presencial o virtual",
+    modules: 8,
+    sessions: 8,
+    link: "https://forbes.es/forbes-sagardoy-business-school-sostenibilidad-corporativa"
+  },
+  {
+    title: "forbes sagardoy: in company",
+    description: "Programas a medida diseñados para tu empresa",
+    img: "https://forbes.es/wp-content/uploads/2024/01/6-1-scaled.jpg",
+    link: "https://forbes.es/forbes-sagardoy-business-school-in-company/"
+  },
+]
+
 interface FlipCardProps {
   title: string;
   description: string;
   imageSrc: string;
   date?: string;
   modality?: string;
-  modules?: string;
-  duration?: string;
-  link: string;
+  modules?: number;
+  duration?: number;
+  link?: string;
 }
 
 function FlipCard({ title, description, imageSrc, date, modality, modules, duration, link }: FlipCardProps) {
@@ -23,16 +82,19 @@ function FlipCard({ title, description, imageSrc, date, modality, modules, durat
             <p>{description}</p>
           </div>
         </div>
-        <div className="flip-card-back">
-        <ul>
-            {/* Renderizar los campos solo si tienen contenido */}
-            {date && date.trim() !== '' && <li><b>Fecha</b>: {date}</li>}
-            {modality && modality.trim() !== '' && <li><b>Modalidad</b>: {modality}</li>}
-            {modules && modules.trim() !== '' && <li><b>Módulos</b>: {modules}</li>}
-            {duration && duration.trim() !== '' && <li><b>Duración</b>: {duration}</li>}
-          </ul>
-          <a href={link}>Más Info</a>
-        </div>
+        {(date || modality || modules || duration || link) ?
+          (<div className="flip-card-back">
+            <ul>
+              {/* Renderizar los campos solo si tienen contenido */}
+              {date && date.trim() !== '' && <li><b>Fecha</b>: {date}</li>}
+              {modality && modality.trim() !== '' && <li><b>Modalidad</b>: {modality}</li>}
+              {modules && <li><b>Módulos</b>: {`${modules} ${modules === 1 ? 'módulo' : 'módulos'}`}</li>}
+              {duration && <li><b>Duración</b>: {`${duration} ${duration === 1 ? 'sesión' : 'sesiones'}`}</li>}
+            </ul>
+            <a href={link}>Más Info</a>
+          </div>)
+          : <div></div>
+        }
       </div>
     </div>
   );
@@ -41,77 +103,23 @@ function FlipCard({ title, description, imageSrc, date, modality, modules, durat
 function Grid() {
   return (
     <div>
-     <h2 className="grid-title">Executive Programs</h2>
-    <div className="card-container">
-      <div className="card">
-        <FlipCard
-          title="Leadership Essentials"
-          description="Impulsando tu trayectoria"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/2-1-scaled.jpg"
-          date="Mayo-Junio (viernes)"
-          modality="Presencial o virtual"
-          modules="2 módulos"
-          duration="10 sesiones"
-          link="https://forbes.es/forbes-sagardoy-business-school/leadeship-essentials/"
-        />
+      <h2 className="grid-title">Executive Programs</h2>
+      <div className="card-container">
+        {cards.map((card, index) => (
+          <div key={index} className="card">
+            <FlipCard
+              title={card.title}
+              description={card.description}
+              imageSrc={card.img}
+              date={card.date}
+              modality={card.format}
+              modules={card.modules}
+              duration={card.sessions}
+              link={card.link}
+            />
+          </div>
+        ))}
       </div>
-      <div className="card">
-        <FlipCard
-          title="Customer Experience"
-          description="En la excelencia del lujo"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/4-1-scaled.jpg"
-          date="Mayo-Junio (Jueves)"
-          modality="Presencial"
-          modules="6 módulos"
-          duration="12 sesiones"
-          link="https://forbes.es/forbes-sagardoy-business-school/customer-experience/"
-        />
-      </div>
-      <div className="card">
-        <FlipCard
-          title="El valor de la diversidad"
-          description="Diversidad, equidad, inclusión y accesibilidad"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg"
-          date="Mayo-Junio (Martes/Jueves)"
-          modality="Presencial o virtual"
-          modules="8 módulos"
-          duration="8 sesiones"
-          link="https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
-        />
-      </div>
-      <div className="card">
-        <FlipCard
-          title="IA"
-          description="Transformando negocios e industrias"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg"
-          date="Mayo-Junio (Jueves)"
-          modality="Presencial o virtual"
-          modules="3 módulos"
-          duration="6 sesiones"
-          link="https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
-        />
-      </div>
-      <div className="card">
-        <FlipCard
-          title="Sostenibilidad corporativa"
-          description="Claves para el futuro"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg"
-          date="Mayo-Junio (Jueves)"
-          modality="Presencial o virtual"
-          modules="8 módulos"
-          duration="8 sesiones"
-          link="https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
-        />
-      </div>
-      <div className="card">
-        <FlipCard
-          title="Forbes Sagardoy: In Company"
-          description="Programas a medida diseñados para tu empresa"
-          imageSrc="https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg"
-         link="https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
-        />
-      </div>
-    </div>
     </div>
   );
 }
