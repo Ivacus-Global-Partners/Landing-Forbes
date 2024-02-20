@@ -1,0 +1,31 @@
+.additional-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+.additional-heading {
+    font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
+    color: #8F0025;
+    margin: 32px 0;
+    max-width: 100%;
+  }
+  
+  .content-and-image {
+    display: flex;
+    flex-direction: row; /* Alinea el contenido y la imagen en una fila */
+  }
+  
+  .content {
+    flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
+  }
+  
+  .image {
+    flex: 1; /* Permite que la imagen ocupe todo el espacio disponible */
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+  }
+  
+  .image figure {
+    margin: 0; /* Elimina los márgenes predeterminados de la figura */
+  }
+  
