@@ -17,15 +17,15 @@ interface Values {
 }
 
 interface Errors {
-    name: [],
-    lastName: [],
-    email: [],
-    program: [],
-    country: [],
-    prefix: [],
-    phone: [],
-    acceptedPolicy: [],
-    keepContact: []
+    name: string[],
+    lastName: string[],
+    email: string[],
+    program: string[],
+    country: string[],
+    prefix: string[],
+    phone: string[],
+    acceptedPolicy: string[],
+    keepContact: string[]
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -137,10 +137,50 @@ const Form = () => {
         setValues({ ...values, [name]: e.target.type === 'checkbox' ? checked : value });
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        // Inicializar un objeto para almacenar los errores
+        let newErrors: Errors = errors;
+
+        if (values.name === '') {
+            newErrors = { ...newErrors, name: ['El nombre es obligatorio'] };
+        }
+        if (values.lastName === '') {
+            newErrors = { ...newErrors, lastName: ['El apellido es obligatorio'] };
+        }
+        if (values.email === '') {
+            newErrors = { ...newErrors, email: ['El email es obligatorio'] };
+        }
+        if (values.program === '0') {
+            newErrors = { ...newErrors, program: ['El programa es obligatorio'] };
+        }
+        if (values.country === '') {
+            newErrors = { ...newErrors, country: ['El país es obligatorio'] };
+        }
+        if (values.phone === '') {
+            newErrors = { ...newErrors, phone: ['El teléfono es obligatorio'] };
+        }
+        if (!values.acceptedPolicy) {
+            newErrors = { ...newErrors, acceptedPolicy: ['Debes aceptar la política de privacidad'] };
+        }
+        if (!values.keepContact) {
+            newErrors = { ...newErrors, keepContact: ['Este campo es obligatorio'] };
+        }
+
+        // Actualizar los errores solo si hay errores nuevos
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+        } else {
+            console.log('Formulario enviado');
+        }
+    }
+
+
     return (
         <div className={classes.container}>
             <h1>No esperes, actúa.</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Input
                     required
                     name="name"

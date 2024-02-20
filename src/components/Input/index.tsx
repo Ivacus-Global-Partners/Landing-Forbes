@@ -72,9 +72,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         }
     },
     error: {
-        color: 'red',
-        fontSize: '14px',
-        marginTop: '5px'
+        color: '#fff',
+        fontSize: '0.75em',
+        marginTop: '10px',
+        backgroundColor: '#F23A3C',
+        width: 'fit-content',
+        padding: '2px 5px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+    },
+    errorStyle: {
+        backgroundColor: '#FFD6D6',
     }
 }));
 
@@ -127,12 +136,14 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
             )
 
     return (
-        <div className={`${classes.input} ${backgroundHover === undefined || backgroundHover === true ? classes.inputFocused : ''}`} style={style}>
+        <div className={`${classes.input} ${(errors && errors.length > 0) ? classes.errorStyle : ''} ${backgroundHover === undefined || backgroundHover === true ? classes.inputFocused : ''}`} style={style}>
             {type !== 'checkbox' && labelTag}
             {input}
             {type === 'checkbox' && labelTag}
             {errors && errors.length > 0 && errors.map((error, index) => (
-                <p className={classes.error} key={index}>{error}</p>
+                <p className={classes.error} key={index}>
+                    <img style={{ width: '0.9em' }} src="https://cdn.jotfor.ms/images/exclamation-octagon.png" alt="error" />
+                    {error}</p>
             ))}
         </div>
     );
