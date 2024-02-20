@@ -75,6 +75,22 @@ const useStyles = makeStyles((theme: Theme) => ({
         '& img': {
             width: '26px',
         }
+    },
+    divider: {
+        width: '104%',
+        border: '0.5px solid #FFF',
+        margin: '0 -10px',
+    },
+    submit: {
+        width: '100%',
+        backgroundColor: '#8F0025',
+        color: 'white',
+        cursor: 'pointer',
+        border: 'none',
+        textTransform: 'uppercase',
+        fontSize: '18px',
+        padding: '20px 0',
+        marginBottom: '10px'
     }
 }));
 
@@ -199,7 +215,24 @@ const Form = () => {
                     style={{ flex: 'auto', display: 'inline' }}
                     labelStyle={{ color: '#6d6d6d' }}
                     inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
+                    backgroundHover={false}
                 />
+                <Input
+                    required
+                    name="keepContact"
+                    value={values.keepContact.toString()}
+                    label="Deseo mantenerme informado por email y/o teléfono sobre novedades informativas de SpainMedia y Grupo Sagardoy."
+                    type="checkbox"
+                    checked={values.keepContact}
+                    onChange={handleChange}
+                    errors={errors.keepContact}
+                    style={{ flex: 'auto', display: 'inline' }}
+                    labelStyle={{ color: '#6d6d6d' }}
+                    inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
+                    backgroundHover={false}
+                />
+                <hr className={classes.divider} />
+                <button className={classes.submit} type="submit">Solicitar Información</button>
             </form>
         </div>
     );

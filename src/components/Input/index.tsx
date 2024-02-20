@@ -11,9 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '10px 7px 7px',
         boxSizing: 'border-box',
         height: 'fit-content',
-        '&:focus-within': {
-            backgroundColor: 'white',
-        },
         '& label': {
             color: 'black',
             fontWeight: '500',
@@ -50,6 +47,11 @@ const useStyles = makeStyles((theme: Theme) => ({
             }
         },
     },
+    inputFocused: {
+        '&:focus-within': {
+            backgroundColor: 'white',
+        },
+    },
     phoneContainer: {
         display: 'flex',
         gap: '5px',
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, checked, errors, inputStyle, labelStyle, style }:
+const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, checked, errors, inputStyle, labelStyle, style, backgroundHover }:
     {
         name: string,
         value: string,
@@ -87,6 +89,7 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
         inputStyle?: React.CSSProperties,
         labelStyle?: React.CSSProperties,
         style?: React.CSSProperties,
+        backgroundHover?: boolean
     }) => {
     const classes = useStyles();
 
@@ -118,7 +121,7 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
             )
 
     return (
-        <div className={classes.input} style={style}>
+        <div className={`${classes.input} ${backgroundHover === undefined || backgroundHover === true ? classes.inputFocused : ''}`} style={style}>
             {type !== 'checkbox' && labelTag}
             {input}
             {type === 'checkbox' && labelTag}
