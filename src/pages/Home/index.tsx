@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Footer from '../../components/Footer';
 import FormAndVideo from '../../components/FormAndVideo';
 import Grid from '../../components/Grid';
 import { makeStyles } from '@mui/styles';
@@ -40,7 +39,6 @@ const Home: React.FC = () => {
       <FormAndVideo />
       <Grid />
       <FinalPart/>
-      <Footer />
     </div>
   )
 }

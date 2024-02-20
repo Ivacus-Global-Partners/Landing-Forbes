@@ -86,14 +86,14 @@ function FlipCard({ title, description, imageSrc, date, modality, modules, durat
           (<div className="flip-card-back">
             <ul>
               {/* Renderizar los campos solo si tienen contenido */}
-              {date && date.trim() !== '' && <li><b>Fecha</b>: {date}</li>}
-              {modality && modality.trim() !== '' && <li><b>Modalidad</b>: {modality}</li>}
-              {modules && <li><b>Módulos</b>: {`${modules} ${modules === 1 ? 'módulo' : 'módulos'}`}</li>}
-              {duration && <li><b>Duración</b>: {`${duration} ${duration === 1 ? 'sesión' : 'sesiones'}`}</li>}
+              {date && date.trim() !== '' && <li><b>Fecha</b>:<br/> {date}</li>}
+              {modality && modality.trim() !== '' && <li><b>Modalidad</b>:<br/> {modality}</li>}
+              {modules && <li><b>Módulos</b>:<br/> {`${modules} ${modules === 1 ? 'módulo' : 'módulos'}`}</li>}
+              {duration && <li><b>Duración</b>:<br/> {`${duration} ${duration === 1 ? 'sesión' : 'sesiones'}`}</li>}
             </ul>
             <a href={link}>Más Info</a>
           </div>)
-          : <div></div>
+          : <div className="flip-card-back"></div>
         }
       </div>
     </div>

@@ -5,22 +5,27 @@
 
 @media (max-width: 768px) {
   .card {
-    flex: 1 1 45%; /* Reducir el tamaño de las tarjetas en pantallas más pequeñas */
+    flex: 1 1 45%;
+    /* Reducir el tamaño de las tarjetas en pantallas más pequeñas */
   }
 }
 
 @media (max-width: 576px) {
   .card {
-    flex: 1 1 100%; /* Mostrar una tarjeta por fila en pantallas muy pequeñas */
+    flex: 1 1 100% !important;
+    /* Mostrar una tarjeta por fila en pantallas muy pequeñas */
   }
 }
 
 /* Estilos para la tarjeta de volteo */
 .flip-card {
   background-color: transparent;
-  width: 100%; /* Ancho deseado */
-  height: 100%; /* Alto deseado */
-  perspective: 1000px; /* Profundidad de perspectiva para el efecto 3D */
+  width: 100%;
+  /* Ancho deseado */
+  height: 100%;
+  /* Alto deseado */
+  perspective: 1000px;
+  /* Profundidad de perspectiva para el efecto 3D */
   overflow: visible;
 }
 
@@ -34,10 +39,12 @@
 }
 
 .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg); /* Volteo cuando se pasa el mouse por encima */
+  transform: rotateY(180deg);
+  z-index: 1;
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -45,48 +52,70 @@
 }
 
 .flip-card-front {
-  background-color: #fff; /* Color del frente de la tarjeta */
+  background-color: #fff;
+  /* Color del frente de la tarjeta */
 }
 
 .flip-card-back {
-  background-color: #f2f2f2; /* Color de la parte trasera de la tarjeta */
+  background-color: #f2f2f2;
+  /* Color de la parte trasera de la tarjeta */
   transform: rotateY(180deg);
   border: 1px solid black;
 }
 
 .card-container {
-  display: flex; /* Muestra las tarjetas en una línea */
-  flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en líneas adicionales si es necesario */
-  justify-content: space-between; /* Distribuye uniformemente el espacio entre las tarjetas */
-  gap: 25px;
+  display: flex;
+  /* Muestra las tarjetas en una línea */
+  flex-wrap: wrap;
+  /* Permite que las tarjetas se envuelvan en líneas adicionales si es necesario */
+  justify-content: space-between;
+  /* Distribuye uniformemente el espacio entre las tarjetas */
+  gap: 32px;
 }
 
 
 /* Estilos para las tarjetas */
 .card {
-  position: relative; /* Posición relativa para que el contenido absoluto se posicione dentro de la tarjeta */
-  width: 470px; /* Ancho deseado de la tarjeta */
-  height: 300px; /* Altura deseada de la tarjeta */
-  background-color: #fff; /* Color de fondo de la tarjeta */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 0px; /* Bordes redondeados */
-  overflow: visible; /* Oculta cualquier contenido que se desborde */
-  flex: 1 1 30%; /* Establece el ancho de cada tarjeta para que haya tres por fila */
+  position: relative;
+  /* Posición relativa para que el contenido absoluto se posicione dentro de la tarjeta */
+  width: 470px;
+  /* Ancho deseado de la tarjeta */
+  height: 300px;
+  /* Altura deseada de la tarjeta */
+  background-color: #fff;
+  /* Color de fondo de la tarjeta */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+  border-radius: 0px;
+  /* Bordes redondeados */
+  overflow: visible;
+  /* Oculta cualquier contenido que se desborde */
+  flex: 1 1 30%;
+  /* Establece el ancho de cada tarjeta para que haya tres por fila */
 }
 
 .card img {
-  width: 100%; /* Ancho completo de la imagen */
-  height: 100%; /* Altura completa de la imagen */
-  object-fit: cover; /* Ajusta la imagen para que cubra completamente el contenedor */
+  width: 100%;
+  /* Ancho completo de la imagen */
+  height: 100%;
+  /* Altura completa de la imagen */
+  object-fit: cover;
+  /* Ajusta la imagen para que cubra completamente el contenedor */
 }
 
 .card-content {
-  position: absolute; /* Posición absoluta para superponer el contenido sobre la imagen */
-  top: 20px; /* Distancia desde la parte superior de la tarjeta */
-  left: 25px; /* Distancia desde el lado izquierdo de la tarjeta */
-  right: 20px; /* Distancia desde el lado derecho de la tarjeta */
-  color: #fff; /* Color del texto */
-  bottom: 0px; /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
+  position: absolute;
+  /* Posición absoluta para superponer el contenido sobre la imagen */
+  top: 20px;
+  /* Distancia desde la parte superior de la tarjeta */
+  left: 20px;
+  /* Distancia desde el lado izquierdo de la tarjeta */
+  right: 20px;
+  /* Distancia desde el lado derecho de la tarjeta */
+  color: #fff;
+  /* Color del texto */
+  bottom: 0px;
+  /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
   text-align: center;
 }
 
@@ -95,23 +124,30 @@
   margin: 0;
   font-size: 28px;
   position: absolute;
-  top: 10px; /* Ajusta el título a la parte superior de la tarjeta */
-  z-index: 1; /* Asegura que el título esté por encima de la imagen */
-  color: white; /* Color del texto */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Fuente del texto */
-  font-weight: bold; /* Peso de la fuente */
-  margin: 0; /* Elimina los márgenes predeterminados */
-  text-transform: uppercase; /* Convierte el texto en mayúsculas */
-  text-align: left; /* Alinea el texto a la izquierda */
+  top: 10px;
+  /* Asegura que el título esté por encima de la imagen */
+  color: white;
+  /* Color del texto */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Fuente del texto */
+  font-weight: bold;
+  /* Peso de la fuente */
+  margin: 0;
+  /* Elimina los márgenes predeterminados */
+  text-transform: uppercase;
+  /* Convierte el texto en mayúsculas */
+  text-align: left;
+  /* Alinea el texto a la izquierda */
 }
+
 .card-content p {
   margin-top: 10px;
   font-size: 20px;
   position: absolute;
-  bottom: 8%; /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
+  bottom: 8%;
+  /* Ajusta la posición del contenido a la parte inferior de la tarjeta */
   left: 0px;
   right: 20px;
-  z-index: 1;
   color: white;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
@@ -125,6 +161,45 @@
   margin: 32px 0;
   max-width: 100%;
   display: block;
-  font-size: 37px;
+  font-size: 2.3em;
   font-weight: 400;
+}
+
+.flip-card-back {
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card-back a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #8F0025;
+  padding: 5px 0;
+  margin: auto 10px 10px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Work Sans", "Helvetica", "sans-serif";
+  display: block;
+}
+
+.flip-card-back ul {
+  list-style-type: none;
+  margin: 50px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 0 0 40px;
+}
+
+.flip-card-back ul li {
+  text-transform: uppercase;
+  flex-basis: 37%;
+  color: black;
+  margin-bottom: 20px;
+  text-align: left;
+  background: url(https://forbes.es/wp-content/uploads/2024/01/flecha_svg-01.png) no-repeat left center;
+  padding: 3px 0 3px 30px;
+  background-size: 15px;
+  font-size: 14px;
+  line-height: 1.6;
 }
