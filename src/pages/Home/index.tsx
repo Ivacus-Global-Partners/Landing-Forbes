@@ -31,8 +31,8 @@ const Home: React.FC = () => {
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="keywords" content="forbes, sagardoy, business school" />
       </Helmet>
-      <div id="video-container">
-        <video id="banner-video" width="100%" height="auto" muted loop autoPlay>
+      <div>
+        <video width="100%" height="auto" muted loop autoPlay>
           <source src="https://firebasestorage.googleapis.com/v0/b/sagardoy-lms.appspot.com/o/website%2FlandingForbes%2F01_animacion_2.mp4?alt=media&token=e87bf6f6-fab8-4b2e-87fd-4beddae00329" type="video/mp4" />
           Video no soportado
         </video>
