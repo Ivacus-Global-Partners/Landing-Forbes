@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Footer from '../../components/Footer';
 import FormAndVideo from '../../components/FormAndVideo';
+import Grid from '../../components/Grid';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
@@ -37,6 +38,7 @@ const Home: React.FC = () => {
         </video>
       </div>
       <FormAndVideo />
+      <Grid />
       <Footer />
     </div>
   )
