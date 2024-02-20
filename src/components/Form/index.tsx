@@ -72,9 +72,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         gap: '10px',
+        '&:hover': {
+            backgroundColor: '#2DBC29',
+        },
         '& img': {
             width: '26px',
-        }
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '48%'
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '100%'
+        },
     },
     divider: {
         width: '104%',
@@ -90,7 +99,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         textTransform: 'uppercase',
         fontSize: '18px',
         padding: '20px 0',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        '&:hover': {
+            backgroundColor: '#29000B',
+        },
     }
 }));
 

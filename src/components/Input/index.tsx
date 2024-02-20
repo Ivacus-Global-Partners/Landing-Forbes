@@ -8,6 +8,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         flexDirection: 'column',
         flex: '1',
         minWidth: '200px',
+        [theme.breakpoints.down('md')]: {
+            minWidth: '300px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            minWidth: '200px',
+        },
         padding: '10px 7px 7px',
         boxSizing: 'border-box',
         height: 'fit-content',

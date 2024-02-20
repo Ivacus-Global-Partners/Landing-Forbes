@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     container: {
         display: 'flex',
         columnGap: '30px',
+        [theme.breakpoints.down('md')]: {
+            flexDirection: 'column',
+            rowGap: '30px',
+        },
         '& div': {
             flex: 1
         },
@@ -14,13 +18,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     video: {
         display: 'flex',
         flexDirection: 'column',
-        rowGap: '80px',
+        rowGap: '74px',
         '& img': {
             width: '100%',
+            [theme.breakpoints.down('sm')]: {
+                display: 'none',
+            },
         },
         '& iframe': {
             width: '100%',
-        }
+            [theme.breakpoints.down('sm')]: {
+                height: '55vw',
+            },
+        },
     }
 }));
 
