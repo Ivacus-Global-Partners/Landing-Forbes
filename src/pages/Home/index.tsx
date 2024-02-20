@@ -5,7 +5,7 @@ import FormAndVideo from '../../components/FormAndVideo';
 import Grid from '../../components/Grid';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-
+import FinalPart from '../../components/FinalPart';
 const useStyles = makeStyles((theme: Theme) => ({
   banner: {
     width: '100%'
@@ -39,6 +39,7 @@ const Home: React.FC = () => {
       </div>
       <FormAndVideo />
       <Grid />
+      <FinalPart/>
       <Footer />
     </div>
   )
