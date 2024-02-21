@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     container: {
         display: 'flex',
         columnGap: '30px',
+        width: '100%',
         [theme.breakpoints.down('md')]: {
             flexDirection: 'column',
             rowGap: '30px',
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         rowGap: '74px',
         '& img': {
             width: '100%',
-            [theme.breakpoints.down('sm')]: {
+            [theme.breakpoints.down('md')]: {
                 display: 'none',
             },
         },
@@ -34,11 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-const FormAndVideo = () => {
+const FormAndVideo = ({ id }: { id?: string }) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} id={id}>
             <Form />
             <div className={classes.video}>
                 <iframe width="560" height="347" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>

@@ -1,148 +1,160 @@
 .additional-content {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
 
 
-  .wp-block-heading {
-    font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
-    color: #8F0025;
-    margin: 32px 0;
-    max-width: 100%;
-    margin-left: 10px;/* Ajusta el margen izquierdo según sea necesario */
-    font-size: 37px;
-    font-weight: normal;
-  }
-  
-  
-  .content-and-image {
-    display: flex;
-    flex-direction: row; /* Alinea el contenido y la imagen en una fila */
-  }
-  
-  .content {
-    flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
-    margin-right: 2px; /* Ajusta el margen derecho para crear espacio entre el contenido y la imagen */
-  }
-  
-  .image {
-    flex: 1; /* Permite que la imagen ocupe todo el espacio disponible */
-    display: flex;
-    justify-content: center; /* Alinea la imagen a la derecha */
-  }
-  
-  .image figure {
-    margin: 0; /* Elimina los márgenes predeterminados de la figura */
-  }
-  
-  .additional-content {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .wp-block-heading {
-    font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
-    color: #8F0025;
-    margin: 32px 0;
-    max-width: 100%;
-    margin-left: 10px; /* Ajusta el margen izquierdo según sea necesario */
-    font-size: 37px;
-    font-weight: normal;
-  }
-  
-  .content-and-image {
-    display: flex;
-    flex-direction: row; /* Alinea el contenido y la imagen en una fila */
-  }
-  
-  .content {
-    flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
-    margin-right: 2px; /* Ajusta el margen derecho para crear espacio entre el contenido y la imagen */
-  }
-  
-  .image {
-    flex: 1; /* Permite que la imagen ocupe todo el espacio disponible */
-    display: flex;
-    justify-content: center; /* Alinea la imagen a la derecha */
-  }
-  
-  .image figure {
-    margin: 0; /* Elimina los márgenes predeterminados de la figura */
-  }
-  
-  .custom-ol {
-    list-style-type: none;
-    counter-reset: custom-counter;
-    padding-left: 0;
-  }
-  
-  .custom-ol li {
-    counter-increment: custom-counter;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .custom-ol li::before {
-    content: counter(custom-counter);
-    color: white;
-    background: #8F0025;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    line-height: 35px;
-    display: inline-block;
-    margin-right: 10px;
-    margin-left: 8px;
-    font-size: 20px;
-  }
-  
-  .custom-ol li strong {
-    color: #8F0025;
-    font-weight: bold;
-    display: inline;
-    margin-bottom: 5px;
-    font-size: 20px;
-  }
-  
-  .custom-ol li p {
-    
-    margin-top: 2px;
-    margin-left: 51px;
-    color: #444;
-    font-size: 24px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-  }
-  
-  .wp-block-button__link {
-    background: #8F0025;
-    color: white !important;
-    font-weight: normal;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 1px;
-    text-decoration: none;
-    display: inline-block;
-    margin-left: auto; /* Esto empujará el botón hacia la derecha */
-    margin-top: 20px; /* Ajusta según sea necesario */
-    margin-bottom: 20px; /* Ajusta según sea necesario */
-  }
-  
-  /* Media queries para dispositivos móviles */
+.wp-block-heading {
+  font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
+  color: #8F0025;
+  margin: 32px 0;
+  max-width: 100%;
+  /* Ajusta el margen izquierdo según sea necesario */
+  font-size: 37px;
+  font-weight: normal;
+}
+
+
+.content-and-image {
+  display: flex;
+  flex-direction: row;
+  /* Alinea el contenido y la imagen en una fila */
+}
+
+.content {
+  flex: 1;
+  /* Permite que el contenido ocupe todo el espacio disponible */
+  margin-right: 2px;
+  /* Ajusta el margen derecho para crear espacio entre el contenido y la imagen */
+}
+
+.image {
+  flex: 1;
+}
+
+.image figure {
+  margin: 0;
+  /* Elimina los márgenes predeterminados de la figura */
+}
+
+.additional-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wp-block-heading {
+  font-family: Arial, Roboto-Regular, HelveticaNeue, sans-serif;
+  color: #8F0025;
+  margin: 32px 0;
+  max-width: 100%;
+  /* Ajusta el margen izquierdo según sea necesario */
+  font-size: 37px;
+  font-weight: normal;
+}
+
+.content-and-image {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  /* Alinea el contenido y la imagen en una fila */
+}
+
+.content {
+  flex: 1;
+  /* Permite que el contenido ocupe todo el espacio disponible */
+  margin-right: 2px;
+  /* Ajusta el margen derecho para crear espacio entre el contenido y la imagen */
+}
+
+.image {
+  flex: 1;
+}
+
+.image figure {
+  margin: 0;
+  /* Elimina los márgenes predeterminados de la figura */
+}
+
+.custom-ol {
+  list-style-type: none;
+  counter-reset: custom-counter;
+  padding-left: 0;
+}
+
+.custom-ol li {
+  counter-increment: custom-counter;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.custom-ol li::before {
+  content: counter(custom-counter);
+  color: white;
+  background: #8F0025;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 8px;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  left: -8px;
+}
+
+.custom-ol li strong {
+  color: #8F0025;
+  font-weight: bold;
+  display: inline;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.custom-ol li p {
+
+  margin-top: 2px;
+  margin-left: 51px;
+  color: #444;
+  font-size: 24px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.wp-block-button__link {
+  background: #8F0025;
+  color: white !important;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 1px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: auto;
+  /* Esto empujará el botón hacia la derecha */
+  margin-top: 20px;
+  /* Ajusta según sea necesario */
+  margin-bottom: 20px;
+  /* Ajusta según sea necesario */
+}
+
+/* Media queries para dispositivos móviles */
 @media screen and (max-width: 768px) {
-    .content-and-image {
-      flex-direction: column;
-    }
-    
-    .content {
-      margin-right: 0;
-    }
-    
-    .wp-block-button__link {
-      width: 100%;
-      text-align: center;
-      margin-left: 0;
-    }
+  .content-and-image {
+    flex-direction: column;
   }
+
+  .content {
+    margin-right: 0;
+  }
+
+  .wp-block-button__link {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+}

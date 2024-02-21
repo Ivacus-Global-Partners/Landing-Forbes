@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
+import countries from '../../resources/data/countries';
 
 const useStyles = makeStyles((theme: Theme) => ({
     input: {
@@ -122,7 +123,11 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
             ? (
                 <div className={classes.phoneContainer}>
                     <div style={{ width: '40%' }} className={classes.phoneInput}>
-                        <input style={inputStyle} type="text" id="prefix" name="prefix" value={prefix} onChange={onChange} />
+                        <select style={{ width: '100%' }} id="prefix" name="prefix" value={prefix} onChange={onChange}>
+                            {countries.map((country, index) => (
+                                <option key={index} value={country.prefix}>{`${country.prefix} (${country.name})`}</option>
+                            ))}
+                        </select>
                         <p>Código país</p>
                     </div>
                     <div style={{ width: '60%' }} className={classes.phoneInput}>

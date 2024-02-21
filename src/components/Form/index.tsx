@@ -134,6 +134,7 @@ const Form = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         const checked = e.target.type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : false;
+        setErrors({ ...errors, [name]: [] });
         setValues({ ...values, [name]: e.target.type === 'checkbox' ? checked : value });
     }
 

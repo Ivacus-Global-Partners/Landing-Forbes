@@ -12,14 +12,41 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     margin: '0 15px',
     rowGap: '30px',
+  },
+  downloadButton: {
+    backgroundColor: '#8F0025',
+    color: 'white',
+    cursor: 'pointer',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    fontSize: '16px',
+    padding: '15px 20px 16px',
+    fontFamily: 'Work Sans, sans-serif',
+    transition: 'background-color 0.3s',
+    border: 'none',
+    '&:hover': {
+      backgroundColor: '#000',
+    },
   }
 }))
 
 const Home: React.FC = () => {
 
   const classes = useStyles();
+
+  const scrollTo = (id: string, offset: number = 50) => () => {
+    const section = document.getElementById(id);
+    if (section) {
+      const sectionPos = section.offsetTop - offset;
+      window.scrollTo({
+        top: sectionPos,
+        behavior: 'smooth'
+      });
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -36,9 +63,10 @@ const Home: React.FC = () => {
           Video no soportado
         </video>
       </div>
-      <FormAndVideo />
+      <FormAndVideo id="formulario" />
       <Grid />
-      <FinalPart/>
+      <FinalPart />
+      <button onClick={scrollTo('formulario', 20)} className={classes.downloadButton}>descargar folleto</button>
     </div>
   )
 }

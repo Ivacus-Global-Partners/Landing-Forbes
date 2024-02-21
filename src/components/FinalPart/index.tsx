@@ -11,46 +11,22 @@ function AdditionalContent() {
             <div className="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
               <ol className="custom-ol">
                 <li>
-                  <strong>Promover la excelencia empresarial</strong>
-                  <p>Actuar como un socio estratégico, proporcionando orientación,<br /> conocimiento actualizado, herramientas y apoyo para impulsar el <br /> crecimiento empresarial de nuestros partners.</p>
+                  <p style={{ marginTop: 0, fontSize: '20px' }}><strong>Promover la excelencia empresarial</strong> <br />
+                    Actuar como un socio estratégico, proporcionando orientación, conocimiento actualizado, herramientas y apoyo para impulsar el  crecimiento empresarial de nuestros partners.</p>
                 </li>
                 <li>
-                  <strong>Desarrollo continuo del talento</strong>
-                  <p>Guiar y acompañar a las empresas en el desarrollo constante de <br /> sus equipos, dotándoles de las herramientas necesarias para <br /> crecer en un contexto en el cual el cambio es una constante.</p>
+                  <p style={{ marginTop: 0, fontSize: '20px' }}><strong>Desarrollo continuo del talento</strong><br />
+                    Guiar y acompañar a las empresas en el desarrollo constante de  sus equipos, dotándoles de las herramientas necesarias para  crecer en un contexto en el cual el cambio es una constante.</p>
                 </li>
                 <li>
-                  <strong>Respuesta a necesidades específicas y transversales</strong>
-                  <p>Entender las necesidades de cada empresa, ofreciendo soluciones formativas en formatos en abierto con el fin de impulsar una comunidad de expertos y en formatos in-company ofreciendo soluciones formativas personalizadas.</p>
+                  <p style={{ marginTop: 0, fontSize: '20px' }}><strong>Respuesta a necesidades específicas y transversales</strong><br />
+                    Entender las necesidades de cada empresa, ofreciendo soluciones formativas en formatos en abierto con el fin de impulsar una comunidad de expertos y en formatos in-company ofreciendo soluciones formativas personalizadas.</p>
                 </li>
                 <li>
-                  <strong>Desarrollo de habilidades clave</strong>
-                  <p>Desarrollar competencias clave como el pensamiento estratégico, sistémico y la capacidad de innovación para sentar las bases para un crecimiento sostenido.</p>
+                  <p style={{ marginTop: 0, fontSize: '20px' }}><strong>Desarrollo de habilidades clave</strong><br />
+                    Desarrollar competencias clave como el pensamiento estratégico, sistémico y la capacidad de innovación para sentar las bases para un crecimiento sostenido.</p>
                 </li>
               </ol>
-              <div style={{ width: '100%', textAlign: 'right', marginTop: '30px', marginBottom: '30px' }}>
-                <div className="wp-block-buttons is-content-justification-center is-layout-flex wp-container-core-buttons-layout-1 wp-block-buttons-is-layout-flex">
-                  <div className="button-container">
-                    <div className="wp-block-button">
-                      <a
-                        className="wp-block-button__link wp-element-button"
-                        href="#formulario"
-                        style={{
-                          background: '#8F0025',
-                          color: 'white',
-                          fontWeight: 'normal',
-                          textTransform: 'uppercase',
-                          padding: '10px 20px',
-                          borderRadius: '1px',
-                          textDecoration: 'none',
-                          display: 'inline-block'
-                        }}
-                      >
-                        Descargar folleto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -60,10 +36,10 @@ function AdditionalContent() {
               loading="lazy"
               decoding="async"
               width="563"
-              height="675"
               src="https://forbes.es/wp-content/uploads/2024/01/Diseno-sin-titulo-7-563x675.png"
               alt=""
               className="wp-image-403244"
+              style={{ maxWidth: '100%', height: 'auto'}}
             />
           </figure>
         </div>
