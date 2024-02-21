@@ -12,11 +12,11 @@ function AdditionalContent() {
               <ol className="custom-ol">
                 <li>
                   <strong>Promover la excelencia empresarial</strong>
-                  <p>Actuar como un socio estratégico, proporcionando orientación, conocimiento actualizado, herramientas y apoyo para impulsar el crecimiento empresarial de nuestros partners.</p>
+                  <p>Actuar como un socio estratégico, proporcionando orientación,<br /> conocimiento actualizado, herramientas y apoyo para impulsar el <br /> crecimiento empresarial de nuestros partners.</p>
                 </li>
                 <li>
                   <strong>Desarrollo continuo del talento</strong>
-                  <p>Guiar y acompañar a las empresas en el desarrollo constante de sus equipos, dotándoles de las herramientas necesarias para crecer en un contexto en el cual el cambio es una constante.</p>
+                  <p>Guiar y acompañar a las empresas en el desarrollo constante de <br /> sus equipos, dotándoles de las herramientas necesarias para <br /> crecer en un contexto en el cual el cambio es una constante.</p>
                 </li>
                 <li>
                   <strong>Respuesta a necesidades específicas y transversales</strong>
@@ -27,6 +27,30 @@ function AdditionalContent() {
                   <p>Desarrollar competencias clave como el pensamiento estratégico, sistémico y la capacidad de innovación para sentar las bases para un crecimiento sostenido.</p>
                 </li>
               </ol>
+              <div style={{ width: '100%', textAlign: 'right', marginTop: '30px', marginBottom: '30px' }}>
+                <div className="wp-block-buttons is-content-justification-center is-layout-flex wp-container-core-buttons-layout-1 wp-block-buttons-is-layout-flex">
+                  <div className="button-container">
+                    <div className="wp-block-button">
+                      <a
+                        className="wp-block-button__link wp-element-button"
+                        href="#formulario"
+                        style={{
+                          background: '#8F0025',
+                          color: 'white',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          padding: '10px 20px',
+                          borderRadius: '1px',
+                          textDecoration: 'none',
+                          display: 'inline-block'
+                        }}
+                      >
+                        Descargar folleto
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
