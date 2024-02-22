@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 
 const RouterComponent: React.FC = () => {
-    return (
+
+   return (
         <Router>
             <Routes>
-                <Route path="/landing/forbes/" element={<Home />} />
+                
+                <Route path= '*' element = {<Home />} />
+                
+
             </Routes>
         </Router>
     );
