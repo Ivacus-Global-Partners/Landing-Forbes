@@ -136,7 +136,10 @@ const Form = () => {
         const checked = e.target.type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : false;
         setErrors({ ...errors, [name]: [] });
         // Si el valor no es un número y name es phone, no permitir que se escriba
-        if (isNaN(+value) && name === 'phone') return;
+        if (isNaN(+value) && name === 'phone') {
+            setErrors({ ...errors, [name]: ['Debe ser un número'] })
+            return
+        };
         setValues({ ...values, [name]: e.target.type === 'checkbox' ? checked : value });
     }
 
