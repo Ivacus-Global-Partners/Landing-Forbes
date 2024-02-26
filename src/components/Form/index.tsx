@@ -47,10 +47,14 @@ const useStyles = makeStyles((theme: Theme) => ({
             lineHeignt: '1.45',
         },
         '& form': {
-            display: 'flex',
-            flexWrap: 'wrap',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
             width: '100%',
-            gap: '15px'
+            gap: '15px',
+            [theme.breakpoints.down('sm')]: {
+                display:'flex',
+                flexDirection: 'column',
+            }
         }
     },
     whatsappContainer: {
@@ -58,6 +62,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         minWidth: '200px',
         padding: '0 35px 0 7px',
         flex: 'auto',
+        gridColumn: 'span 2',
+        [theme.breakpoints.down('sm')]: {
+            width: 'auto',
+        }
     },
     whatsapp: {
         textDecoration: 'none',
@@ -89,6 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '104%',
         border: '0.5px solid #FFF',
         margin: '0 -10px',
+        gridColumn: 'span 2',
     },
     submit: {
         width: '100%',
@@ -100,6 +109,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         fontSize: '18px',
         padding: '20px 0',
         marginBottom: '10px',
+        gridColumn: 'span 2',
         '&:hover': {
             backgroundColor: '#29000B',
         },
@@ -270,7 +280,7 @@ const Form = () => {
                     checked={values.acceptedPolicy}
                     onChange={handleChange}
                     errors={errors.acceptedPolicy}
-                    style={{ flex: 'auto', display: 'inline' }}
+                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2'}}
                     labelStyle={{ color: '#6d6d6d' }}
                     inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
                     backgroundHover={false}
@@ -284,7 +294,7 @@ const Form = () => {
                     checked={values.keepContact}
                     onChange={handleChange}
                     errors={errors.keepContact}
-                    style={{ flex: 'auto', display: 'inline' }}
+                    style={{ flex: 'auto', display: 'inline',gridColumn: 'span 2' }}
                     labelStyle={{ color: '#6d6d6d' }}
                     inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
                     backgroundHover={false}
