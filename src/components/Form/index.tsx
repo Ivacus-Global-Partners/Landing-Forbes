@@ -123,7 +123,7 @@ const Form = () => {
         email: '',
         program: '0',
         country: '+34',
-        prefix: '',
+        prefix: '+34',
         phone: '',
         acceptedPolicy: false,
         keepContact: false
