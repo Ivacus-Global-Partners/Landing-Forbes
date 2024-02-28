@@ -46,6 +46,12 @@ const useStyles = makeStyles((theme: Theme) => ({
             fontFamily: 'inherit',
             padding: '6.5px 8px',
             fontSize: '1em',
+            '&:hover': {
+                outline: 'none',
+            },
+            '&:focus': {
+                outline: 'none',
+            }
         },
     },
     inputFocused: {
