@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         '& select': {
             border: '1px solid #8f0025',
             fontFamily: 'inherit',
-            padding: '5px',
+            padding: '6.5px 8px',
             fontSize: '1em',
         },
     },
