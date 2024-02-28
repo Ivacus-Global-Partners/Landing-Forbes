@@ -5,12 +5,54 @@ import Input from '../Input';
 import countries from '../../resources/data/countries';
 
 const programs = [
-    'Customer Experience en la excelencia del lujo',
-    'El valor de la diversidad; Diversidad, Equidad, Inclusión',
-    'IA: Transformando negocios e industrias',
-    'Leadership Essentials: Impulsando tu trayectoria',
-    'Sostenibilidad Corporativa: Claves para el futuro',
-    'In Company'
+    {
+        name: 'Customer Experience en la excelencia del lujo',
+        productId: '0xe88c9e',
+        formId: '',
+        href: 'https://sagardoyschool.com/archivos/customer-experience-en-la-excelencia-del-lujo.pdf',
+        download: 'customer-experience-en-la-excelencia-del-lujo.pdf',
+        redirect: 'https://sagardoyschool.com/thank-you/customer-experience-en-la-excelencia-del-lujo/',
+    },
+    {
+        name: 'El valor de la diversidad; Diversidad, Equidad, Inclusión',
+        productId: '0xe88cb8',
+        formId: '',
+        href: 'https://sagardoyschool.com/archivos/programa-el-valor-de-la-diversidad.pdf',
+        download: 'programa-el-valor-de-la-diversidad.pdf',
+        redirect: 'https://sagardoyschool.com/thank-you/programa-el-valor-de-la-diversidad/',
+    },
+    {
+        name: 'Inteligencia Artificial: Transformando negocios e industrias',
+        productId: '0xe88ca5',
+        formId: '',
+        href: 'https://sagardoyschool.com/archivos/inteligencia-artificial-transformando-industrias-y-negocios.pdf',
+        download: 'inteligencia-artificial-transformando-industrias-y-negocios.pdf',
+        redirect: 'https://sagardoyschool.com/thank-you/inteligencia-artificial-transformando-industrias-y-negocios/',
+    },
+    {
+        name: 'Leadership Essentials: Impulsando tu trayectoria',
+        productId: '0xe88c96',
+        formId: '',
+        href: 'https://sagardoyschool.com/archivos/leadership-essentials-impulsando-tu-trayectoria.pdf',
+        download: 'leadership-essentials-impulsando-tu-trayectoria.pdf',
+        redirect: 'https://sagardoyschool.com/thank-you/leadership-essentials-impulsando-tu-trayectoria/',
+    },
+    {
+        name: 'Sostenibilidad Corporativa: Claves para el futuro',
+        productId: '0xe88cac',
+        formId: '',
+        href: 'https://sagardoyschool.com/archivos/sostenibilidad-corporativa-claves-para-el-futuro.pdf',
+        download: 'sostenibilidad-corporativa-claves-para-el-futuro.pdf',
+        redirect: 'https://sagardoyschool.com/thank-you/sostenibilidad-corporativa-claves-para-el-futuro/',
+    },
+    {
+        name: 'In Company',
+        prouctId: '0',
+        formId: '',
+        href: '',
+        download: '',
+        redirect: '',
+    }
 ]
 
 interface Values {
@@ -248,7 +290,7 @@ const Form = () => {
         if (values.email === '') {
             newErrors = { ...newErrors, email: ['Este campo es obligatorio'] };
         }
-        if (values.program === '0') {
+        if (values.program === '') {
             newErrors = { ...newErrors, program: ['Este campo es obligatorio'] };
         }
         if (values.country === '') {
@@ -264,11 +306,69 @@ const Form = () => {
             newErrors = { ...newErrors, keepContact: ['Este campo es obligatorio'] };
         }
 
+        const program = programs.find((program) => program.productId === values.program);
+
+        if (!program) {
+            newErrors = { ...newErrors, program: ['Programa no encontrado'] };
+        }
+
         // Actualizar los errores solo si hay errores nuevos
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
-        } else {
-            console.log('Formulario enviado');
+        }
+
+        if (Object.keys(errors).length === 0 && Object.keys(newErrors).length === 0 && program) {
+
+            var myHeaders = new Headers();
+            myHeaders.append("fx", program.formId); // formId
+            myHeaders.append("content-type", "application/json");
+
+            var raw = JSON.stringify({
+                name: values.name,
+                lastName: values.lastName,
+                email: values.email,
+                phone: `${values.prefix} ${values.phone}`,
+                prefix: values.prefix,
+                "privacy-police": values.acceptedPolicy,
+                productId: program.productId, // productId
+                formId: program.formId,
+            });
+
+            var requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+            };
+
+            fetch("https://api.ivacus.com/x/deliverForm", requestOptions)
+                .then((response) => response.text())
+                .then((result) => console.log(result))
+                .catch((error) => console.log("error", error));
+
+            setValues({
+                name: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                prefix: '0',
+                program: '',
+                country: '',
+                acceptedPolicy: false,
+                keepContact: false
+            })
+            setErrors({})
+
+            const downloadLink = document.createElement("a");
+            downloadLink.href = program.href;
+            downloadLink.download = program.download;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            if (!program.redirect) return
+            const redirectLink = document.createElement("a");
+            redirectLink.href = program.redirect;
+            redirectLink.click();
         }
     }
 
@@ -346,7 +446,7 @@ const Form = () => {
                 >
                     <option value="">Seleccione</option>
                     {programs.map((program, index) => (
-                        <option key={index} value={program}>{program}</option>
+                        <option key={index} value={program.productId}>{program.name}</option>
                     ))}
                 </Input>
                 <Input
