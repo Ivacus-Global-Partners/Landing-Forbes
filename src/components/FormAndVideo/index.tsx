@@ -12,14 +12,15 @@ const useStyles = makeStyles((theme: Theme) => ({
             flexDirection: 'column',
             rowGap: '30px',
         },
-        '& div': {
-            flex: 1
-        },
     },
     video: {
         display: 'flex',
         flexDirection: 'column',
-        rowGap: '74px',
+        rowGap: '50px',
+        width: '51%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+        },
         '& img': {
             width: '100%',
             [theme.breakpoints.down('md')]: {
@@ -42,7 +43,7 @@ const FormAndVideo = ({ id }: { id?: string }) => {
         <div className={classes.container} id={id}>
             <Form />
             <div className={classes.video}>
-                <iframe width="560" height="347" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                <iframe width="560" height="369" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                 <img src="https://forbes.es/wp-content/uploads/2024/02/Flechas_Video-1200x460.png" alt="arrows" />
             </div>
         </div>

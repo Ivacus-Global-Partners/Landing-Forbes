@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEventHandler } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 import countries from '../../resources/data/countries';
@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     input: {
         display: 'flex',
         flexDirection: 'column',
+        fontFamily: "'Inter', sans-serif",
+        fontWeight: '100',
         flex: '1',
         minWidth: '200px',
         [theme.breakpoints.down('md')]: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: 'fit-content',
         '& label': {
             color: 'black',
-            fontWeight: '500',
+            fontWeight: '600',
             fontFamily: '"Inter", sans-serif',
             fontSize: '15px',
             marginBottom: '8px',
@@ -28,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         '& input': {
             border: '1px solid #8f0025',
             fontFamily: 'inherit',
-            padding: '5px',
-            fontSize: '1em',
+            padding: '8px',
+            fontSize: '15px',
             '&:hover': {
                 outline: '2px solid #C8A3AC',
                 boxShadow: 'inset 0 0 0 1px #8f0025',
@@ -44,19 +46,11 @@ const useStyles = makeStyles((theme: Theme) => ({
             fontFamily: 'inherit',
             padding: '5px',
             fontSize: '1em',
-            '&:hover': {
-                outline: '2px solid #C8A3AC',
-                boxShadow: 'inset 0 0 0 1px #8f0025',
-            },
-            '&:focus': {
-                outline: '2px solid #C8A3AC',
-                boxShadow: 'inset 0 0 0 1px #8f0025',
-            }
         },
     },
     inputFocused: {
         '&:focus-within': {
-            backgroundColor: 'white',
+            backgroundColor: '#F1F5FF',
         },
     },
     phoneContainer: {
@@ -88,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, checked, errors, inputStyle, labelStyle, style, backgroundHover }:
+const Input = ({ name, value, label, id, type, select, children, prefix, required, onChange, onBlur, checked, errors, inputStyle, labelStyle, style, backgroundHover }:
     {
         name: string,
         value: string,
@@ -100,6 +94,7 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
         prefix?: string,
         required?: boolean,
         onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+        onBlur?: FormEventHandler<HTMLInputElement | HTMLSelectElement>,
         checked?: boolean,
         errors?: Array<string>,
         inputStyle?: React.CSSProperties,
@@ -115,7 +110,7 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
 
     const input = select
         ? (
-            <select id={id} name={name} value={value} onChange={onChange}>
+            <select onBlur={onBlur} style={inputStyle} id={id} name={name} value={value} onChange={onChange}>
                 {children}
             </select>
         )
@@ -123,7 +118,7 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
             ? (
                 <div className={classes.phoneContainer}>
                     <div style={{ width: '40%' }} className={classes.phoneInput}>
-                        <select style={{ width: '100%' }} id="prefix" name="prefix" value={prefix} onChange={onChange}>
+                        <select style={{ width: '100%', ...inputStyle }} id="prefix" name="prefix" value={prefix} onChange={onChange}>
                             {countries.map((country, index) => (
                                 <option key={index} value={country.prefix}>{`${country.prefix} (${country.name})`}</option>
                             ))}
@@ -131,13 +126,13 @@ const Input = ({ name, value, label, id, type, select, children, prefix, require
                         <p>Código país</p>
                     </div>
                     <div style={{ width: '60%' }} className={classes.phoneInput}>
-                        <input style={inputStyle} type="tel" id={id} name={name} value={value} onChange={onChange} />
+                        <input onBlur={onBlur} style={inputStyle} type="tel" id={id} name={name} value={value} onChange={onChange} />
                         <p>Número de teléfono</p>
                     </div>
                 </div >
             )
             : (
-                <input style={inputStyle} type={type} id={id} name={name} value={value} checked={type === 'checkbox' && checked} onChange={onChange} />
+                <input onBlur={onBlur} style={inputStyle} type={type} id={id} name={name} value={value} checked={type === 'checkbox' && checked} onChange={onChange} />
             )
 
     return (

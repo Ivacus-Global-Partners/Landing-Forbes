@@ -4,6 +4,15 @@ import { Theme } from '@mui/material';
 import Input from '../Input';
 import countries from '../../resources/data/countries';
 
+const programs = [
+    'Customer Experience en la excelencia del lujo',
+    'El valor de la diversidad; Diversidad, Equidad, Inclusión',
+    'IA: Transformando negocios e industrias',
+    'Leadership Essentials: Impulsando tu trayectoria',
+    'Sostenibilidad Corporativa: Claves para el futuro',
+    'In Company'
+]
+
 interface Values {
     name: string,
     lastName: string,
@@ -17,15 +26,15 @@ interface Values {
 }
 
 interface Errors {
-    name: string[],
-    lastName: string[],
-    email: string[],
-    program: string[],
-    country: string[],
-    prefix: string[],
-    phone: string[],
-    acceptedPolicy: string[],
-    keepContact: string[]
+    name?: string[],
+    lastName?: string[],
+    email?: string[],
+    program?: string[],
+    country?: string[],
+    prefix?: string[],
+    phone?: string[],
+    acceptedPolicy?: string[],
+    keepContact?: string[]
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         boxSizing: 'border-box',
         rowGap: '25px',
         flex: '1',
+        position: 'relative',
+        overflow: 'hidden',
         '& h1': {
             margin: '0',
             color: '#8F0025',
@@ -52,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             width: '100%',
             gap: '15px',
             [theme.breakpoints.down('sm')]: {
-                display:'flex',
+                display: 'flex',
                 flexDirection: 'column',
             }
         }
@@ -113,6 +124,63 @@ const useStyles = makeStyles((theme: Theme) => ({
         '&:hover': {
             backgroundColor: '#29000B',
         },
+    },
+    notification: {
+        position: 'absolute',
+        width: '100%',
+        backgroundColor: '#DC2626',
+        color: 'white',
+        display: 'flex',
+        top: 0,
+        left: 0,
+        transition: 'top 0.5s',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px',
+        boxSizing: 'border-box',
+        '& a': {
+            backgroundColor: 'white',
+            textDecoration: 'none',
+            borderRadius: '5px',
+            padding: '10px 20px',
+            fontSize: '16px',
+            color: 'black',
+        },
+        '& p': {
+            margin: 0,
+            fontSize: '15px',
+        },
+        '& span': {
+            backgroundColor: 'white',
+            color: 'black',
+            borderRadius: '20px',
+            padding: '4px 10px',
+            fontWeight: 'bold',
+            fontSize: '14px',
+        }
+    },
+    hidden: {
+        top: -100,
+    },
+    fixed: {
+        backgroundColor: '#CAF9CC',
+        '& p': {
+            color: '#6D857D',
+        },
+        '& span': {
+            backgroundColor: '#18BD5B',
+            color: 'white'
+        },
+        '& button': {
+            backgroundColor: '#18BD5B',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            padding: '10px 20px',
+            fontSize: '16px',
+        }
     }
 }));
 
@@ -121,36 +189,43 @@ const Form = () => {
         name: '',
         lastName: '',
         email: '',
-        program: '0',
+        program: '',
         country: '+34',
         prefix: '+34',
         phone: '',
         acceptedPolicy: false,
         keepContact: false
     })
-    const [errors, setErrors] = useState<Errors>({
-        name: [],
-        lastName: [],
-        email: [],
-        program: [],
-        country: [],
-        prefix: [],
-        phone: [],
-        acceptedPolicy: [],
-        keepContact: []
-    });
+    const [openFixed, setOpenFixed] = useState(false);
+    const [errors, setErrors] = useState<Errors>({});
     const classes = useStyles();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         const checked = e.target.type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : false;
-        setErrors({ ...errors, [name]: [] });
+        setErrors((current) => {
+            const newErrors: { [key: string]: string[] | undefined } = { ...current };
+            delete newErrors[name];
+            if (Object.keys(current).includes(name) && Object.keys(newErrors).length <= 0) setOpenFixed(true);
+            return newErrors;
+        });
         // Si el valor no es un número y name es phone, no permitir que se escriba
         if (isNaN(+value) && name === 'phone') {
             setErrors({ ...errors, [name]: ['Debe ser un número'] })
             return
         };
         setValues({ ...values, [name]: e.target.type === 'checkbox' ? checked : value });
+    }
+
+    const validateInput = (e: React.FormEvent<HTMLInputElement>) => {
+        setOpenFixed(false)
+        const { name, value } = e.currentTarget;
+        if (value === '') {
+            setErrors({ ...errors, [name]: ['Este campo es obligatorio'] })
+        }
+        else if (name === 'email' && !value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+            setErrors({ ...errors, [name]: ['Introduzca una dirección e-mail válida'] })
+        }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -160,25 +235,25 @@ const Form = () => {
         let newErrors: Errors = errors;
 
         if (values.name === '') {
-            newErrors = { ...newErrors, name: ['El nombre es obligatorio'] };
+            newErrors = { ...newErrors, name: ['Este campo es obligatorio'] };
         }
         if (values.lastName === '') {
-            newErrors = { ...newErrors, lastName: ['El apellido es obligatorio'] };
+            newErrors = { ...newErrors, lastName: ['Este campo es obligatorio'] };
         }
         if (values.email === '') {
-            newErrors = { ...newErrors, email: ['El email es obligatorio'] };
+            newErrors = { ...newErrors, email: ['Este campo es obligatorio'] };
         }
         if (values.program === '0') {
-            newErrors = { ...newErrors, program: ['El programa es obligatorio'] };
+            newErrors = { ...newErrors, program: ['Este campo es obligatorio'] };
         }
         if (values.country === '') {
-            newErrors = { ...newErrors, country: ['El país es obligatorio'] };
+            newErrors = { ...newErrors, country: ['Este campo es obligatorio'] };
         }
         if (values.phone === '') {
-            newErrors = { ...newErrors, phone: ['El teléfono es obligatorio'] };
+            newErrors = { ...newErrors, phone: ['Este campo es obligatorio'] };
         }
         if (!values.acceptedPolicy) {
-            newErrors = { ...newErrors, acceptedPolicy: ['Debes aceptar la política de privacidad'] };
+            newErrors = { ...newErrors, acceptedPolicy: ['Este campo es obligatorio'] };
         }
         if (!values.keepContact) {
             newErrors = { ...newErrors, keepContact: ['Este campo es obligatorio'] };
@@ -192,60 +267,93 @@ const Form = () => {
         }
     }
 
+    const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string, offset: number = 0) => {
+        e.preventDefault();
+        const element = document.getElementById(target);
+        console.log('element>>>>>', element)
+        if (element instanceof HTMLElement) {
+            const rect = element.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            window.scrollTo({
+                top: rect.top + scrollTop - offset,
+                behavior: 'smooth',
+            });
+        }
+    }
 
     return (
         <div className={classes.container}>
+            <div className={`${classes.notification} ${Object.keys(errors).length <= 0 ? classes.hidden : ''}`}>
+                <p>Hay <span>{Object.keys(errors).length}</span> errores en esta página. Favor corregirlo antes de continuar.</p>
+                <a href="#error" onClick={(e) => smoothScroll(e, 'error', 30)}>Ver Errores</a>
+            </div>
+            <div className={`${classes.notification} ${classes.fixed} ${!openFixed ? classes.hidden : ''}`}>
+                <p><span>✓</span>¡Bien hecho! Todos los errores resueltos.</p>
+                <button onClick={() => setOpenFixed(false)}>Listo</button>
+            </div>
             <h1>No esperes, actúa.</h1>
             <form onSubmit={handleSubmit}>
                 <Input
                     required
+                    id={errors.name ? 'error' : ''}
                     name="name"
                     value={values.name}
                     label="Nombre"
                     type="text"
                     onChange={handleChange}
                     errors={errors.name}
+                    onBlur={validateInput}
                 />
                 <Input
                     required
+                    id={errors.lastName ? 'error' : ''}
                     name="lastName"
                     value={values.lastName}
                     label="Apellidos"
                     type="text"
                     onChange={handleChange}
                     errors={errors.lastName}
+                    onBlur={validateInput}
                 />
                 <Input
                     required
+                    id={errors.email ? 'error' : ''}
                     name="email"
                     value={values.email}
                     label="Email"
                     type="email"
                     onChange={handleChange}
                     errors={errors.email}
+                    onBlur={validateInput}
                 />
                 <Input
                     required
+                    id={errors.program ? 'error' : ''}
                     name="program"
                     value={values.program}
                     label="Programa de interés"
                     select
                     onChange={handleChange}
                     errors={errors.program}
+                    inputStyle={{ fontWeight: values.program === '' ? '100' : '' }}
+                    onBlur={validateInput}
                 >
-                    <option value="0">Seleccionar</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
+                    <option value="">Seleccione</option>
+                    {programs.map((program, index) => (
+                        <option key={index} value={program}>{program}</option>
+                    ))}
                 </Input>
                 <Input
                     required
+                    id={errors.country ? 'error' : ''}
                     name="country"
                     value={values.country}
                     label="País de residencia"
                     select
                     onChange={handleChange}
                     errors={errors.country}
+                    onBlur={validateInput}
                 >
                     <option value=''>Seleccionar</option>
                     {countries.map((country) => (
@@ -254,6 +362,7 @@ const Form = () => {
                 </Input>
                 <Input
                     required
+                    id={errors.phone ? 'error' : ''}
                     name="phone"
                     prefix={values.prefix}
                     value={values.phone}
@@ -261,6 +370,7 @@ const Form = () => {
                     type="phone"
                     onChange={handleChange}
                     errors={errors.phone}
+                    onBlur={validateInput}
                 />
                 <div className={classes.whatsappContainer}>
                     <a className={classes.whatsapp} href="acceptedPolicy" target="_blank" rel="noreferrer">
@@ -271,6 +381,7 @@ const Form = () => {
                 <br />
                 <Input
                     required
+                    id={errors.acceptedPolicy ? 'error' : ''}
                     name="acceptedPolicy"
                     value={values.acceptedPolicy.toString()}
                     label={
@@ -280,13 +391,14 @@ const Form = () => {
                     checked={values.acceptedPolicy}
                     onChange={handleChange}
                     errors={errors.acceptedPolicy}
-                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2'}}
-                    labelStyle={{ color: '#6d6d6d' }}
+                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
+                    labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
                     inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
                     backgroundHover={false}
                 />
                 <Input
                     required
+                    id={errors.keepContact ? 'error' : ''}
                     name="keepContact"
                     value={values.keepContact.toString()}
                     label="Deseo mantenerme informado por email y/o teléfono sobre novedades informativas de SpainMedia y Grupo Sagardoy."
@@ -294,8 +406,8 @@ const Form = () => {
                     checked={values.keepContact}
                     onChange={handleChange}
                     errors={errors.keepContact}
-                    style={{ flex: 'auto', display: 'inline',gridColumn: 'span 2' }}
-                    labelStyle={{ color: '#6d6d6d' }}
+                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
+                    labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
                     inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
                     backgroundHover={false}
                 />
