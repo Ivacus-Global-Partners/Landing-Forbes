@@ -147,6 +147,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             padding: '10px 20px',
             fontSize: '16px',
             color: 'black',
+            textAlign: 'center',
         },
         '& p': {
             margin: 0,
@@ -171,7 +172,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
         '& span': {
             backgroundColor: '#18BD5B',
-            color: 'white'
+            color: 'white',
+            marginRight: '5px',
         },
         '& button': {
             backgroundColor: '#18BD5B',
