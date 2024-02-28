@@ -139,7 +139,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         alignItems: 'center',
         padding: '10px',
         boxSizing: 'border-box',
-        gap:'10px',
+        [theme.breakpoints.down('sm')]: {
+            gap: '10px',
+        },
         '& a': {
             backgroundColor: 'white',
             textDecoration: 'none',
@@ -288,7 +290,7 @@ const Form = () => {
     return (
         <div className={classes.container}>
             <div className={`${classes.notification} ${Object.keys(errors).length <= 0 ? classes.hidden : ''}`}>
-                <p>Hay <span>{Object.keys(errors).length}</span> {`errores en esta página. Favor corregirlo${Object.keys(errors).length>1 ? 's': ''} antes de continuar.`}</p>
+                <p>Hay <span>{Object.keys(errors).length}</span> {`errores en esta página. Favor corregirlo${Object.keys(errors).length > 1 ? 's' : ''} antes de continuar.`}</p>
                 <a href="#error" onClick={(e) => smoothScroll(e, 'error', 30)}>Ver Errores</a>
             </div>
             <div className={`${classes.notification} ${classes.fixed} ${!openFixed ? classes.hidden : ''}`}>
