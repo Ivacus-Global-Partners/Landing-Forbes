@@ -318,7 +318,6 @@ const Form = () => {
         }
 
         if (Object.keys(errors).length === 0 && Object.keys(newErrors).length === 0 && program) {
-
             var myHeaders = new Headers();
             myHeaders.append("fx", program.formId); // formId
             myHeaders.append("content-type", "application/json");
@@ -342,40 +341,42 @@ const Form = () => {
 
             fetch("https://api.ivacus.com/x/deliverForm", requestOptions)
                 .then((response) => response.text())
-                .then((result) => console.log(result))
-                .catch((error) => console.log("error", error));
+                .then((result) => {
 
-            setValues({
-                name: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                prefix: '0',
-                program: '',
-                country: '',
-                acceptedPolicy: false,
-                keepContact: false
-            })
-            setErrors({})
+                    setValues({
+                        name: '',
+                        lastName: '',
+                        email: '',
+                        phone: '',
+                        prefix: '0',
+                        program: '',
+                        country: '',
+                        acceptedPolicy: false,
+                        keepContact: false
+                    });
+                    setErrors({});
 
-            const downloadLink = document.createElement("a");
-            downloadLink.href = program.href;
-            downloadLink.download = program.download;
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = program.href;
+                    downloadLink.download = program.download;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
 
-            if (!program.redirect) return
-            const redirectLink = document.createElement("a");
-            redirectLink.href = program.redirect;
-            redirectLink.click();
+                    if (!program.redirect) return;
+
+                    const redirectLink = document.createElement("a");
+                    redirectLink.href = program.redirect;
+                    redirectLink.click();
+                })
+                .catch((error) => console.log("error>>>>>", error));
         }
+
     }
 
     const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string, offset: number = 0) => {
         e.preventDefault();
         const element = document.getElementById(target);
-        console.log('element>>>>>', element)
         if (element instanceof HTMLElement) {
             const rect = element.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
