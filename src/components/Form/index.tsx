@@ -8,7 +8,7 @@ const programs = [
     {
         name: 'Customer Experience en la excelencia del lujo',
         productId: '0xe88c9e',
-        formId: '',
+        formId: '0xf1bef6',
         href: 'https://sagardoyschool.com/archivos/customer-experience-en-la-excelencia-del-lujo.pdf',
         download: 'customer-experience-en-la-excelencia-del-lujo.pdf',
         redirect: 'https://sagardoyschool.com/thank-you/customer-experience-en-la-excelencia-del-lujo/',
@@ -16,7 +16,7 @@ const programs = [
     {
         name: 'El valor de la diversidad; Diversidad, Equidad, Inclusión',
         productId: '0xe88cb8',
-        formId: '',
+        formId: '0xf1bee9',
         href: 'https://sagardoyschool.com/archivos/programa-el-valor-de-la-diversidad.pdf',
         download: 'programa-el-valor-de-la-diversidad.pdf',
         redirect: 'https://sagardoyschool.com/thank-you/programa-el-valor-de-la-diversidad/',
@@ -24,7 +24,7 @@ const programs = [
     {
         name: 'Inteligencia Artificial: Transformando negocios e industrias',
         productId: '0xe88ca5',
-        formId: '',
+        formId: '0xf1bed7',
         href: 'https://sagardoyschool.com/archivos/inteligencia-artificial-transformando-industrias-y-negocios.pdf',
         download: 'inteligencia-artificial-transformando-industrias-y-negocios.pdf',
         redirect: 'https://sagardoyschool.com/thank-you/inteligencia-artificial-transformando-industrias-y-negocios/',
@@ -32,7 +32,7 @@ const programs = [
     {
         name: 'Leadership Essentials: Impulsando tu trayectoria',
         productId: '0xe88c96',
-        formId: '',
+        formId: '0xf1bef9',
         href: 'https://sagardoyschool.com/archivos/leadership-essentials-impulsando-tu-trayectoria.pdf',
         download: 'leadership-essentials-impulsando-tu-trayectoria.pdf',
         redirect: 'https://sagardoyschool.com/thank-you/leadership-essentials-impulsando-tu-trayectoria/',
@@ -40,7 +40,7 @@ const programs = [
     {
         name: 'Sostenibilidad Corporativa: Claves para el futuro',
         productId: '0xe88cac',
-        formId: '',
+        formId: '0xf1bef0',
         href: 'https://sagardoyschool.com/archivos/sostenibilidad-corporativa-claves-para-el-futuro.pdf',
         download: 'sostenibilidad-corporativa-claves-para-el-futuro.pdf',
         redirect: 'https://sagardoyschool.com/thank-you/sostenibilidad-corporativa-claves-para-el-futuro/',
