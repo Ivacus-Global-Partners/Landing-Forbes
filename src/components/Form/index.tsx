@@ -479,7 +479,7 @@ const Form = () => {
                     onBlur={validateInput}
                 />
                 <div className={classes.whatsappContainer}>
-                    <a className={classes.whatsapp} href="acceptedPolicy" target="_blank" rel="noreferrer">
+                    <a className={classes.whatsapp} href="https://wa.me/%2B34620656389" target="_blank" rel="noreferrer">
                         <img src="https://app-widgets.jotform.io/whatsAppButton/img/wapp.svg" alt="whatsapp-logo" />
                         Contacta por whatsapp
                     </a>
