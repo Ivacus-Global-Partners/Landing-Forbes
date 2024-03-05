@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 import Input from '../Input';
 import countries from '../../resources/data/countries';
+import { useLocation } from 'react-router-dom';
 
 const programs = [
     {
@@ -47,7 +48,7 @@ const programs = [
     },
     {
         name: 'In Company',
-        prouctId: '0',
+        productId: '0',
         formId: '',
         href: '',
         download: '',
@@ -232,11 +233,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Form = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const program = queryParams.get('program');
+
+    useEffect(() => {
+        setValues((current) => ({ ...current, program: program ? program : '' }));
+    }, [program])
+
     const [values, setValues] = useState<Values>({
         name: '',
         lastName: '',
         email: '',
-        program: '',
+        program: program ? program : '',
         country: '+34',
         prefix: '+34',
         phone: '',
@@ -389,7 +398,7 @@ const Form = () => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} id="form">
             <div className={`${classes.notification} ${Object.keys(errors).length <= 0 ? classes.hidden : ''}`}>
                 <p>Hay <span>{Object.keys(errors).length}</span> {`errores en esta página. Favor corregirlo${Object.keys(errors).length > 1 ? 's' : ''} antes de continuar.`}</p>
                 <a href="#error" onClick={(e) => smoothScroll(e, 'error', 30)}>Ver Errores</a>

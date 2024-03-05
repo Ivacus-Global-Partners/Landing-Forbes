@@ -1,18 +1,10 @@
 import React from 'react';
 import './index.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const cards = [
   {
-    title: "leadership essentials",
-    description: "Impulsando tu trayectoria",
-    img: "https://forbes.es/wp-content/uploads/2024/01/2-1-scaled.jpg",
-    date: "Mayo-Junio (viernes)",
-    format: "Presencial o virtual",
-    modules: 2,
-    sessions: 10,
-    link: "https://forbes.es/forbes-sagardoy-business-school/leadeship-essentials/"
-  },
-  {
+    id: "0xe88c9e",
     title: "customer experience",
     description: "En la excelencia del lujo",
     img: "https://forbes.es/wp-content/uploads/2024/01/4-1-scaled.jpg",
@@ -23,6 +15,7 @@ const cards = [
     link: "https://forbes.es/forbes-sagardoy-business-school/customer-experience/"
   },
   {
+    id: "0xe88cb8",
     title: "el valor de la diversidad",
     description: "Diversidad, equidad, inclusión y accesibilidad",
     img: "https://forbes.es/wp-content/uploads/2024/01/3-1-scaled.jpg",
@@ -33,6 +26,7 @@ const cards = [
     link: "https://forbes.es/forbes-sagardoy-business-school/el-poder-de-la-diversidad/"
   },
   {
+    id: "0xe88ca5",
     title: "ia",
     description: "Transformando negocios e industrias",
     img: "https://forbes.es/wp-content/uploads/2024/01/5-1-scaled.jpg",
@@ -43,6 +37,18 @@ const cards = [
     link: "https://forbes.es/forbes-sagardoy-business-school/ia-transformando-la-industria/"
   },
   {
+    id: "0xe88c96",
+    title: "leadership essentials",
+    description: "Impulsando tu trayectoria",
+    img: "https://forbes.es/wp-content/uploads/2024/01/2-1-scaled.jpg",
+    date: "Mayo-Junio (viernes)",
+    format: "Presencial o virtual",
+    modules: 2,
+    sessions: 10,
+    link: "https://forbes.es/forbes-sagardoy-business-school/leadeship-essentials/"
+  },
+  {
+    id: "0xe88cac",
     title: "sostenibilidad corporativa",
     description: "Claves para el futuro",
     img: "https://forbes.es/wp-content/uploads/2024/01/1-1-scaled.jpg",
@@ -53,6 +59,7 @@ const cards = [
     link: "https://forbes.es/forbes-sagardoy-business-school-sostenibilidad-corporativa"
   },
   {
+    id: "0",
     title: "forbes sagardoy: in company",
     description: "Programas a medida diseñados para tu empresa",
     img: "https://forbes.es/wp-content/uploads/2024/01/6-1-scaled.jpg",
@@ -69,9 +76,34 @@ interface FlipCardProps {
   modules?: number;
   duration?: number;
   link?: string;
+  id: string;
 }
 
-function FlipCard({ title, description, imageSrc, date, modality, modules, duration, link }: FlipCardProps) {
+function FlipCard({ title, description, imageSrc, date, modality, modules, duration, link, id }: FlipCardProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
+  const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string, offset: number = 0, program: string) => {
+    e.preventDefault();
+
+    const queryParams = new URLSearchParams(location.search);
+    queryParams.set('program', program);
+
+    navigate({ pathname: location.pathname, search: queryParams.toString() }, { replace: true });
+
+    const element = document.getElementById(target);
+    if (element instanceof HTMLElement) {
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      window.scrollTo({
+        top: rect.top + scrollTop - offset,
+        behavior: 'smooth',
+      });
+    }
+  }
+
   return (
     <div className="flip-card">
       <div className="flip-card-inner">
@@ -91,7 +123,7 @@ function FlipCard({ title, description, imageSrc, date, modality, modules, durat
               {modules && <li><b>Módulos</b>:<br /> {`${modules} ${modules === 1 ? 'módulo' : 'módulos'}`}</li>}
               {duration && <li><b>Duración</b>:<br /> {`${duration} ${duration === 1 ? 'sesión' : 'sesiones'}`}</li>}
             </ul>
-            <a href={link}>Más Info</a>
+            <a href="#form" onClick={(e) => smoothScroll(e, 'form', 30, id)}>Más Info</a>
           </div>)
           : <div className="flip-card-back"></div>
         }
@@ -116,6 +148,7 @@ function Grid() {
               modules={card.modules}
               duration={card.sessions}
               link={card.link}
+              id={card.id}
             />
           </div>
         ))}
