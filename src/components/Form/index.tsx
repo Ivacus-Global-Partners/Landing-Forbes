@@ -81,6 +81,27 @@ interface Errors {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+    mainContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1',
+    },
+    sentMessage: {
+        backgroundColor: '#DBD9D9',
+        height: '70%',
+        width: '100%;',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+        padding: '20px',
+        gap: '10px',
+        '& p': {
+            textAlign: 'center',
+            fontSize: '20px',
+            margin: 0,
+        }
+    },
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -88,7 +109,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '28px 20px',
         boxSizing: 'border-box',
         rowGap: '25px',
-        flex: '1',
         position: 'relative',
         overflow: 'hidden',
         '& h1': {
@@ -236,9 +256,11 @@ const Form = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const program = queryParams.get('program');
+    const [sentForm, setSentForm] = useState(false);
 
     useEffect(() => {
         setValues((current) => ({ ...current, program: program ? program : '' }));
+        setSentForm(false);
     }, [program])
 
     const [values, setValues] = useState<Values>({
@@ -367,23 +389,28 @@ const Form = () => {
 
                     const downloadLink = document.createElement("a");
                     downloadLink.href = program.href;
+                    downloadLink.target = '_blank';
                     downloadLink.download = program.download;
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
 
-                    if (!program.redirect) return;
+                    setSentForm(true);
 
-                    const redirectLink = document.createElement("a");
-                    redirectLink.href = program.redirect;
-                    redirectLink.click();
+                    const scrollLink = document.createElement("a");
+                    scrollLink.href = '#form';
+                    scrollLink.onclick = (e) => smoothScroll(e, 'form', 20);
+                    document.body.appendChild(scrollLink);
+                    scrollLink.click();
+                    document.body.removeChild(scrollLink);
+                    
                 })
                 .catch((error) => console.log("error>>>>>", error));
         }
 
     }
 
-    const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string, offset: number = 0) => {
+    const smoothScroll = (e: MouseEvent | React.MouseEvent<HTMLAnchorElement>, target: string, offset: number = 0) => {
         e.preventDefault();
         const element = document.getElementById(target);
         if (element instanceof HTMLElement) {
@@ -398,137 +425,143 @@ const Form = () => {
     }
 
     return (
-        <div className={classes.container} id="form">
-            <div className={`${classes.notification} ${Object.keys(errors).length <= 0 ? classes.hidden : ''}`}>
-                <p>Hay <span>{Object.keys(errors).length}</span> {`errores en esta página. Favor corregirlo${Object.keys(errors).length > 1 ? 's' : ''} antes de continuar.`}</p>
-                <a href="#error" onClick={(e) => smoothScroll(e, 'error', 30)}>Ver Errores</a>
+        <div className={classes.mainContainer} id="form">
+            <div className={classes.sentMessage} style={{ display: sentForm ? 'flex' : 'none' }}>
+                <p>Muchas gracias por su interés en Forbes Sagardoy <br />Business School.</p>
+                <p>En su correo recibirá la información del programa solicitado.</p>
             </div>
-            <div className={`${classes.notification} ${classes.fixed} ${!openFixed ? classes.hidden : ''}`}>
-                <p><span>✓</span>¡Bien hecho! Todos los errores resueltos.</p>
-                <button onClick={() => setOpenFixed(false)}>Listo</button>
-            </div>
-            <h1>No esperes, actúa.</h1>
-            <form onSubmit={handleSubmit}>
-                <Input
-                    required
-                    id={errors.name ? 'error' : ''}
-                    name="name"
-                    value={values.name}
-                    label="Nombre"
-                    type="text"
-                    onChange={handleChange}
-                    errors={errors.name}
-                    onBlur={validateInput}
-                />
-                <Input
-                    required
-                    id={errors.lastName ? 'error' : ''}
-                    name="lastName"
-                    value={values.lastName}
-                    label="Apellidos"
-                    type="text"
-                    onChange={handleChange}
-                    errors={errors.lastName}
-                    onBlur={validateInput}
-                />
-                <Input
-                    required
-                    id={errors.email ? 'error' : ''}
-                    name="email"
-                    value={values.email}
-                    label="Email"
-                    type="email"
-                    onChange={handleChange}
-                    errors={errors.email}
-                    onBlur={validateInput}
-                />
-                <Input
-                    required
-                    id={errors.program ? 'error' : ''}
-                    name="program"
-                    value={values.program}
-                    label="Programa de interés"
-                    select
-                    onChange={handleChange}
-                    errors={errors.program}
-                    inputStyle={{ fontWeight: values.program === '' ? '100' : '' }}
-                    onBlur={validateInput}
-                >
-                    <option value="">Seleccione</option>
-                    {programs.map((program, index) => (
-                        <option key={index} value={program.productId}>{program.name}</option>
-                    ))}
-                </Input>
-                <Input
-                    required
-                    id={errors.country ? 'error' : ''}
-                    name="country"
-                    value={values.country}
-                    label="País de residencia"
-                    select
-                    onChange={handleChange}
-                    errors={errors.country}
-                    onBlur={validateInput}
-                >
-                    <option value=''>Seleccionar</option>
-                    {countries.map((country) => (
-                        <option key={country.code} value={country.prefix}>{country.name}</option>
-                    ))}
-                </Input>
-                <Input
-                    required
-                    id={errors.phone ? 'error' : ''}
-                    name="phone"
-                    prefix={values.prefix}
-                    value={values.phone}
-                    label="Número de teléfono"
-                    type="phone"
-                    onChange={handleChange}
-                    errors={errors.phone}
-                    onBlur={validateInput}
-                />
-                <div className={classes.whatsappContainer}>
-                    <a className={classes.whatsapp} href="https://wa.me/%2B34620656389" target="_blank" rel="noreferrer">
-                        <img src="https://app-widgets.jotform.io/whatsAppButton/img/wapp.svg" alt="whatsapp-logo" />
-                        Contacta por whatsapp
-                    </a>
+            <div className={classes.container} style={{ display: sentForm ? 'none' : 'flex' }}>
+                <div className={`${classes.notification} ${Object.keys(errors).length <= 0 ? classes.hidden : ''}`}>
+                    <p>Hay <span>{Object.keys(errors).length}</span> {`errores en esta página. Favor corregirlo${Object.keys(errors).length > 1 ? 's' : ''} antes de continuar.`}</p>
+                    <a href="#error" onClick={(e) => smoothScroll(e, 'error', 30)}>Ver Errores</a>
                 </div>
-                <br />
-                <Input
-                    required
-                    id={errors.acceptedPolicy ? 'error' : ''}
-                    name="acceptedPolicy"
-                    value={values.acceptedPolicy.toString()}
-                    label={
-                        <>SpainMedia y Grupo Sagardoy atenderán tu solicitud de información sobre nuestros servicios formativos. Para esta finalidad y las siguientes, puedes oponerte y acceder, rectificar o suprimir tus datos y ejercitar otros derechos como se indica en nuestra <a href="https://forbes.es/politica-de-privacidad/" target='_blank' rel="noreferrer">Política de privacidad </a>.
-                        </>}
-                    type="checkbox"
-                    checked={values.acceptedPolicy}
-                    onChange={handleChange}
-                    errors={errors.acceptedPolicy}
-                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
-                    labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
-                    inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
-                    backgroundHover={false}
-                />
-                <Input
-                    required
-                    id={errors.keepContact ? 'error' : ''}
-                    name="keepContact"
-                    value={values.keepContact.toString()}
-                    label="Deseo mantenerme informado por email y/o teléfono sobre novedades informativas de SpainMedia y Grupo Sagardoy."
-                    type="checkbox"
-                    checked={values.keepContact}
-                    onChange={handleChange}
-                    errors={errors.keepContact}
-                    style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
-                    labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
-                    inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
-                    backgroundHover={false}
-                />
-                <hr className={classes.divider} />
-                <button className={classes.submit} type="submit">Solicitar Información</button>
-            </form>
+                <div className={`${classes.notification} ${classes.fixed} ${!openFixed ? classes.hidden : ''}`}>
+                    <p><span>✓</span>¡Bien hecho! Todos los errores resueltos.</p>
+                    <button onClick={() => setOpenFixed(false)}>Listo</button>
+                </div>
+                <h1>No esperes, actúa.</h1>
+                <form onSubmit={handleSubmit}>
+                    <Input
+                        required
+                        id={errors.name ? 'error' : ''}
+                        name="name"
+                        value={values.name}
+                        label="Nombre"
+                        type="text"
+                        onChange={handleChange}
+                        errors={errors.name}
+                        onBlur={validateInput}
+                    />
+                    <Input
+                        required
+                        id={errors.lastName ? 'error' : ''}
+                        name="lastName"
+                        value={values.lastName}
+                        label="Apellidos"
+                        type="text"
+                        onChange={handleChange}
+                        errors={errors.lastName}
+                        onBlur={validateInput}
+                    />
+                    <Input
+                        required
+                        id={errors.email ? 'error' : ''}
+                        name="email"
+                        value={values.email}
+                        label="Email"
+                        type="email"
+                        onChange={handleChange}
+                        errors={errors.email}
+                        onBlur={validateInput}
+                    />
+                    <Input
+                        required
+                        id={errors.program ? 'error' : ''}
+                        name="program"
+                        value={values.program}
+                        label="Programa de interés"
+                        select
+                        onChange={handleChange}
+                        errors={errors.program}
+                        inputStyle={{ fontWeight: values.program === '' ? '100' : '' }}
+                        onBlur={validateInput}
+                    >
+                        <option value="">Seleccione</option>
+                        {programs.map((program, index) => (
+                            <option key={index} value={program.productId}>{program.name}</option>
+                        ))}
+                    </Input>
+                    <Input
+                        required
+                        id={errors.country ? 'error' : ''}
+                        name="country"
+                        value={values.country}
+                        label="País de residencia"
+                        select
+                        onChange={handleChange}
+                        errors={errors.country}
+                        onBlur={validateInput}
+                    >
+                        <option value=''>Seleccionar</option>
+                        {countries.map((country) => (
+                            <option key={country.code} value={country.prefix}>{country.name}</option>
+                        ))}
+                    </Input>
+                    <Input
+                        required
+                        id={errors.phone ? 'error' : ''}
+                        name="phone"
+                        prefix={values.prefix}
+                        value={values.phone}
+                        label="Número de teléfono"
+                        type="phone"
+                        onChange={handleChange}
+                        errors={errors.phone}
+                        onBlur={validateInput}
+                    />
+                    <div className={classes.whatsappContainer}>
+                        <a className={classes.whatsapp} href="https://wa.me/%2B34620656389" target="_blank" rel="noreferrer">
+                            <img src="https://app-widgets.jotform.io/whatsAppButton/img/wapp.svg" alt="whatsapp-logo" />
+                            Contacta por whatsapp
+                        </a>
+                    </div>
+                    <br />
+                    <Input
+                        required
+                        id={errors.acceptedPolicy ? 'error' : ''}
+                        name="acceptedPolicy"
+                        value={values.acceptedPolicy.toString()}
+                        label={
+                            <>SpainMedia y Grupo Sagardoy atenderán tu solicitud de información sobre nuestros servicios formativos. Para esta finalidad y las siguientes, puedes oponerte y acceder, rectificar o suprimir tus datos y ejercitar otros derechos como se indica en nuestra <a href="https://forbes.es/politica-de-privacidad/" target='_blank' rel="noreferrer">Política de privacidad </a>.
+                            </>}
+                        type="checkbox"
+                        checked={values.acceptedPolicy}
+                        onChange={handleChange}
+                        errors={errors.acceptedPolicy}
+                        style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
+                        labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
+                        inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
+                        backgroundHover={false}
+                    />
+                    <Input
+                        required
+                        id={errors.keepContact ? 'error' : ''}
+                        name="keepContact"
+                        value={values.keepContact.toString()}
+                        label="Deseo mantenerme informado por email y/o teléfono sobre novedades informativas de SpainMedia y Grupo Sagardoy."
+                        type="checkbox"
+                        checked={values.keepContact}
+                        onChange={handleChange}
+                        errors={errors.keepContact}
+                        style={{ flex: 'auto', display: 'inline', gridColumn: 'span 2' }}
+                        labelStyle={{ color: '#6d6d6d', fontWeight: 100 }}
+                        inputStyle={{ margin: 0, marginRight: '10px', cursor: 'pointer' }}
+                        backgroundHover={false}
+                    />
+                    <hr className={classes.divider} />
+                    <button className={classes.submit} type="submit">Solicitar Información</button>
+                </form>
+            </div>
         </div>
     );
 };
