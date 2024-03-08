@@ -12,7 +12,7 @@ const programs = [
         formId: '0xf1bef6',
         href: 'https://sagardoyschool.com/archivos/customer-experience-en-la-excelencia-del-lujo.pdf',
         download: 'customer-experience-en-la-excelencia-del-lujo.pdf',
-        redirect: 'https://sagardoyschool.com/thank-you/customer-experience-en-la-excelencia-del-lujo/',
+        // redirect: 'https://sagardoyschool.com/thank-you/customer-experience-en-la-excelencia-del-lujo/',
     },
     {
         name: 'El valor de la diversidad; Diversidad, Equidad, Inclusión',
@@ -20,7 +20,7 @@ const programs = [
         formId: '0xf1bee9',
         href: 'https://sagardoyschool.com/archivos/programa-el-valor-de-la-diversidad.pdf',
         download: 'programa-el-valor-de-la-diversidad.pdf',
-        redirect: 'https://sagardoyschool.com/thank-you/programa-el-valor-de-la-diversidad/',
+        // redirect: 'https://sagardoyschool.com/thank-you/programa-el-valor-de-la-diversidad/',
     },
     {
         name: 'Inteligencia Artificial: Transformando negocios e industrias',
@@ -28,7 +28,7 @@ const programs = [
         formId: '0xf1bed7',
         href: 'https://sagardoyschool.com/archivos/inteligencia-artificial-transformando-industrias-y-negocios.pdf',
         download: 'inteligencia-artificial-transformando-industrias-y-negocios.pdf',
-        redirect: 'https://sagardoyschool.com/thank-you/inteligencia-artificial-transformando-industrias-y-negocios/',
+        // redirect: 'https://sagardoyschool.com/thank-you/inteligencia-artificial-transformando-industrias-y-negocios/',
     },
     {
         name: 'Leadership Essentials: Impulsando tu trayectoria',
@@ -36,7 +36,7 @@ const programs = [
         formId: '0xf1bef9',
         href: 'https://sagardoyschool.com/archivos/leadership-essentials-impulsando-tu-trayectoria.pdf',
         download: 'leadership-essentials-impulsando-tu-trayectoria.pdf',
-        redirect: 'https://sagardoyschool.com/thank-you/leadership-essentials-impulsando-tu-trayectoria/',
+        // redirect: 'https://sagardoyschool.com/thank-you/leadership-essentials-impulsando-tu-trayectoria/',
     },
     {
         name: 'Sostenibilidad Corporativa: Claves para el futuro',
@@ -52,7 +52,7 @@ const programs = [
         formId: '',
         href: '',
         download: '',
-        redirect: '',
+        // redirect: '',
     }
 ]
 
@@ -403,7 +403,13 @@ const Form = () => {
                     document.body.appendChild(scrollLink);
                     scrollLink.click();
                     document.body.removeChild(scrollLink);
-                    
+
+                    if (!program.redirect) return;
+
+                    const redirectLink = document.createElement("a");
+                    redirectLink.href = program.redirect;
+                    redirectLink.click();
+
                 })
                 .catch((error) => console.log("error>>>>>", error));
         }
