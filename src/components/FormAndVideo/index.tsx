@@ -43,7 +43,7 @@ const FormAndVideo = ({ id }: { id?: string }) => {
         <div className={classes.container} id={id}>
             <Form />
             <div className={classes.video}>
-                <iframe width="560" height="369" src="https://www.youtube.com/embed/BZUu3X-oja4?si=Swmtk5Acrtnc1B5B" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                <iframe width="560" height="369" src="https://www.youtube.com/embed/yKzSsh16vMY" title="Forbes Sagardoy Business School" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 <img src="https://forbes.es/wp-content/uploads/2024/02/Flechas_Video-1200x460.png" alt="arrows" />
             </div>
         </div>
